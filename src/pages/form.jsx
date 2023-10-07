@@ -64,13 +64,13 @@ const Form = () => {
                         control={control}
                         rules={
                             {
-                                required: "Password is issing",
+                                required: "Password is missing",
                                 minLength: {
-                                    value: 2,
+                                    value: 8,
                                     message: "Minimum length must be 8",
                                 },
                                 maxLength: {
-                                    value: 50,
+                                    value: 25,
                                     message: "Maximum length must be 50",
                                 },
                                 pattern:
