@@ -1,5 +1,5 @@
 // import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
+import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 const Login = () => {
@@ -20,6 +20,9 @@ const Login = () => {
 
     const { login, logInfo } = UseAuthHook();
     // const navigate = useNavigate();
+    useEffect(() => {
+        console.log(logInfo);
+    }, [logInfo]);
     const handlerSubmit = (e) => {
         const data =
         {

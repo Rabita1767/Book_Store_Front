@@ -85,7 +85,7 @@
 
 // }
 // export default Password;
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
@@ -96,7 +96,7 @@ const Password = ({ control, errors, watch }) => {
         setPasswordFieldType(prevType => prevType === "text" ? "password" : "text");
     }
     // console.log(passwordFieldType)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const {
         handleSubmit,
         // control,

@@ -5,8 +5,11 @@ const UseAuthHook = () => {
     const [signInfo, setSignInfo] = useState("")
     const [logInfo, setLoginInfo] = useState("")
     const signup = (formData) => {
-        axios.post("http://127.0.0.1:8000/auth/signup", formData)
-            .then(resp => { setSignInfo(resp) })
+        axiosInstance.post("/auth/signup", formData)
+            .then(resp => {
+                setSignInfo(resp.data);
+                console.log(resp.data)
+            })
             .catch(err => { console.log(err) })
     }
     // const login = (formData) => {
@@ -23,7 +26,8 @@ const UseAuthHook = () => {
         axiosInstance.post("/auth/login", formData)
             .then(resp => {
                 setLoginInfo(resp.data);
-                console.log(resp.data)
+                console.log(resp.data);
+                console.log(resp.data.data.token);
                 console.log(logInfo)
             })
             .catch(err => console.log(err))

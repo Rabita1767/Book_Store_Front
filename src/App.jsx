@@ -16,7 +16,8 @@ function App() {
 
   return (
     <>
-      <Login />
+      <Signup />
+
     </>
   )
 }
