@@ -1,0 +1,74 @@
+:root {
+    --color-131921: #131921;
+    --color-3b4149: #3b4149;
+    --color-febd69: #febd69;
+    --color-232f3e: #232f3e;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    /* Increase the gap between cards */
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.product-item img {
+    width: 100%;
+    max-height: 200px;
+    display: block;
+    position: relative;
+    top: -10px;
+    left: -10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.product-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.product-item:hover img {
+    transform: scale(1.1);
+}
+
+button {
+    background-color: var(--color-3b4149);
+    /* Button background color */
+    color: #fff;
+    /* Button text color */
+    border: none;
+    /* Remove button border */
+    padding: 10px 20px;
+    /* Add padding to the button */
+    border-radius: 5px;
+    /* Add border-radius for rounded corners */
+    cursor: pointer;
+    /* Change cursor to a pointer on hover */
+    transition: background-color 0.2s ease-in-out;
+    margin: 0 5px;
+    /* Add a smooth background color transition on hover */
+}
+
+button:hover {
+    background-color: #0056b3;
+    /* Change background color on hover */
+}
