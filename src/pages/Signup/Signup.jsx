@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 import Password from '../../components/form/password';
 const Signup = () => {
-    const { signInfo } = UseAuthHook();
+    const { signInfo, signup } = UseAuthHook();
     const [passwordFieldType, setPasswordFieldType] = useState("password");
     // const navigate = useNavigate();
     const {
@@ -22,7 +22,7 @@ const Signup = () => {
             phone: "",
         }
     })
-    const { signup, signupData } = UseAuthHook()
+
     useEffect(() => {
         console.log(signInfo);
     }, [signInfo])
