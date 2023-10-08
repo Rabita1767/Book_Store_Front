@@ -2,6 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import UseProductHook from "../hooks/useProductHooks";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Header from "../components/Header/header";
 const UpdateBook = () => {
     const { updateId } = useParams();
     const { upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo } = UseProductHook();
@@ -11,18 +12,52 @@ const UpdateBook = () => {
     getBookInfo(updateId);
 
     console.log(updateId);
+    // const defaultValues = {
+    //     image: '', // Initialize with an empty string or the default value you prefer
+    //     isbn: upBook.isbn, // Initialize with an empty string or the default value you prefer
+    //     name: '', // Initialize with an empty string or the default value you prefer
+    //     price: '', // Initialize with an empty string or the default value you prefer
+    //     category: '', // Initialize with an empty string or the default value you prefer
+    //     stock: '', // Initialize with an empty string or the default value you prefer
+    //     author: '', // Initialize with an empty string or the default value you prefer
+    //     publisher: '', // Initialize with an empty string or the default value you prefer
+    //     discountPercentage: '', // Initialize with an empty string or the default value you prefer
+    //     discountStart: '', // Initialize with an empty string or the default value you prefer
+    //     discountEnd: '', // Initialize with an empty string or the default value you prefer
+    // };
+
     const {
         handleSubmit,
         formState: { errors },
         getValues,
+        setValue,
         watch,
         control
-    } = useForm()
+    } = useForm(
+        {
+            // defaultValues
+        }
+    )
+    console.log(upBook)
+    // useEffect(() => {
+    //     setValue("image", upBook.image);
+    //     setValue("isbn", upBook.isbn);
+    //     setValue("name", upBook.name);
+    //     setValue("price", upBook.price);
+    //     setValue("category", upBook.category);
+    //     setValue("stock", upBook.stock);
+    //     setValue("author", upBook.author);
+    //     setValue("publisher", upBook.publisher);
+    //     setValue("discountPercentage", upBook.discountPercentage);
+    //     setValue("discountStart", upBook.discountStart);
+    //     setValue("discountEnd", upBook.discountEnd);
+    // }, [upBook]);
     const handleonSubmit = (data) => {
-        updatedBook(data)
+        updatedBook(data, updateId)
     }
     return (
         <>
+            <Header />
             <form onSubmit={handleSubmit(handleonSubmit)}>
                 <div>
                     <h4>Enter Image</h4>
@@ -46,7 +81,6 @@ const UpdateBook = () => {
                         placeholder="Enter Book Isbn"
                         rules={
                             {
-                                required: "ISBN is missing",
                                 minLength:
                                 {
                                     value: 13,
@@ -76,7 +110,6 @@ const UpdateBook = () => {
                         name="name"
                         control={control}
                         rules={{
-                            required: "Name is missing",
                             minLength:
                             {
                                 value: 2,
@@ -110,7 +143,6 @@ const UpdateBook = () => {
                         name="price"
                         control={control}
                         rules={{
-                            required: "Price is missing",
                             maxLength:
                             {
                                 value: 10,
@@ -144,7 +176,6 @@ const UpdateBook = () => {
                         name="category"
                         control={control}
                         rules={{
-                            required: "Category is missing",
                             minLength:
                             {
                                 value: 2,
@@ -178,7 +209,6 @@ const UpdateBook = () => {
                         name="stock"
                         control={control}
                         rules={{
-                            required: "Stock is missing",
                             min:
                             {
                                 value: 0,
@@ -208,7 +238,6 @@ const UpdateBook = () => {
                         name="author"
                         control={control}
                         rules={{
-                            required: "Author is missing",
                             minLength:
                             {
                                 value: 2,
@@ -242,7 +271,6 @@ const UpdateBook = () => {
                         name="publisher"
                         control={control}
                         rules={{
-                            required: "Publisher is missing",
                             minLength:
                             {
                                 value: 2,
@@ -350,7 +378,7 @@ const UpdateBook = () => {
                     {errors.discountEnd && <h5 className="error-message">{errors.discountEnd.message}</h5>}
                 </div>
                 <div>
-                    <button type="submit">Add Book</button>
+                    <button type="submit">Update Book</button>
                 </div>
             </form>
         </>
