@@ -2,7 +2,10 @@
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
+import { useDispatch } from "react-redux";
+import { addUserInfo } from "../../redux/userSlice";
 const Login = () => {
+    const dispatch = useDispatch();
     const {
         handleSubmit,
         control,
@@ -12,8 +15,8 @@ const Login = () => {
     } = useForm({
         defaultValues: {
 
-            email: "snigdho.howlader@gmail.com",
-            password: "Snigdho@123"
+            email: "rabita@gmail.com",
+            password: "rabita@1234"
 
         }
     })
@@ -30,10 +33,10 @@ const Login = () => {
             password: getValues("password")
         }
         login(data);
-        // navigate('/product');
+        navigate('/addBook');
     }
     console.log(logInfo)
-
+    dispatch(addUserInfo(logInfo))
     return (
         <>
             <div>
@@ -68,12 +71,17 @@ const Login = () => {
                             rules={{
                                 required: "Password is required",
                                 minLength: {
-                                    value: 2,
+                                    value: 8,
                                     message: "Minimum length must be 8",
                                 },
                                 maxLength: {
-                                    value: 50,
+                                    value: 25,
                                     message: "Maximum length must be 50",
+                                },
+                                pattern:
+                                {
+                                    value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/,
+                                    message: "Password must be atleast 8 characters long,it should contain minimum one block letter,one smaill letter and one special character"
                                 }
 
                             }}

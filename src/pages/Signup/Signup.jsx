@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 import Password from '../../components/form/password';
 const Signup = () => {
-    const { signInfo, signup } = UseAuthHook();
+    const { signInfo } = UseAuthHook();
     const [passwordFieldType, setPasswordFieldType] = useState("password");
     // const navigate = useNavigate();
     const {
@@ -22,7 +22,7 @@ const Signup = () => {
             phone: "",
         }
     })
-
+    const { signup, signupData } = UseAuthHook()
     useEffect(() => {
         console.log(signInfo);
     }, [signInfo])
@@ -178,7 +178,7 @@ const Signup = () => {
                         />
                         {errors.name && <h5 className="error-message">{errors.phone.message}</h5>}
                     </div>
-                    <button type="submit" className="submit-button">Submit</button>
+                    <button type="submit" className="submit-button">Submit</button>+
                     {/* <p>Enter Name :</p>
                     <input type="text" label="name" onChange={(e) => setName(e.target.value)} />
                     <p>Enter Email :</p>

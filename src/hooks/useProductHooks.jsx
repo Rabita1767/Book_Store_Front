@@ -7,6 +7,7 @@ const UseProductHook = () => {
     const [nameFilter, setNameFilter] = useState([]);
     const [isbn, setIsbn] = useState("");
     const [param, setParam] = useState([]);
+    const [addBook, setAddBook] = useState("");
     const fetchData = () => {
         axiosInstance.get("/auth/getAll")
             .then(resp => {
@@ -52,7 +53,18 @@ const UseProductHook = () => {
             .catch(err => { console.log(err) })
 
     }
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param };
+    const addBookFunc = (formData) => {
+        axiosInstance.post("/book/addBook", formData)
+            .then(resp => {
+                console.log(resp.data);
+                setAddBook(resp.data);
+            })
+            .catch(err => { console.log(err) })
+    }
+    useEffect(() => {
+        console.log(addBook);
+    }, [addBook])
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook };
 
 }
 export default UseProductHook;
