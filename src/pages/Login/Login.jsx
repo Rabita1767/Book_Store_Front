@@ -33,7 +33,7 @@ const Login = () => {
             password: getValues("password")
         }
         login(data);
-        navigate('/addBook');
+        // navigate('/addBook');
     }
     console.log(logInfo)
     dispatch(addUserInfo(logInfo))
