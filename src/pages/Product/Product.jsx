@@ -5,8 +5,9 @@ import UseProductHook from "../../hooks/useProductHooks";
 import "./product.css";
 import Header from "../../components/Header/header";
 const Product = () => {
+    const [count, setCount] = useState(0);
     const navigate = useNavigate();
-    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook } = UseProductHook();
+    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook, myCart, setAddCart, addCart } = UseProductHook();
     useEffect(() => {
         fetchData();
     }, [])
@@ -18,15 +19,31 @@ const Product = () => {
         navigate(`/product/${id}`)
 
     }
-    // const navigation = () => {
-    //     navigate(`/product/${item.isbn}`)
-    // }
     const handleDelete = (id) => {
         deleteBook(id);
     }
+
+    useEffect(() => {
+        console.log(addCart)
+    }, [addCart])
+    const handleCart = (id) => {
+        const data =
+        {
+            "products":
+                [
+                    {
+                        "p_id": id,
+                        "quantity": 1
+                    }
+                ]
+        }
+        setCount(count + 1);
+        console.log("clicked")
+        myCart(data);
+    }
     return (
         <>
-            <Header />
+            <Header value={count} />
             <div className="product-grid">
                 {product && product.map((item) => (
                     <div key={item.id} className="product-item">
@@ -39,6 +56,7 @@ const Product = () => {
                         {/* <Button myFunc={() => navigate(`/product/${item.isbn}`)} text="Details" /> */}
                         {/* <button onClick={() => navigate(`/product/${item.isbn}`)}>Details</button> */}
                         <button onClick={() => handleDelete(item._id)}>Delete</button>
+                        <button onClick={() => handleCart(item._id)}>Add to Cart</button>
                     </div>
                 ))}
             </div>

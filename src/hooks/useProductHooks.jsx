@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../util/AxiosInstance";
+import { useNavigate } from "react-router-dom";
 const UseProductHook = () => {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
     const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState([]);
     const [searchData, setSearchData] = useState([]);
@@ -11,6 +14,7 @@ const UseProductHook = () => {
     const [delBook, setDeleteBook] = useState("");
     const [upBook, setUpBook] = useState("");
     const [updatedBookInfo, setUpdatedBookInfo] = useState("");
+    const [addCart, setAddCart] = useState("")
     const fetchData = () => {
         axiosInstance.get("/auth/getAll")
             .then(resp => {
@@ -98,7 +102,23 @@ const UseProductHook = () => {
                 console.log(err);
             })
     }
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo };
+    const myCart = (formData) => {
+        axiosInstance.post("/cart/addToCart", formData,
+            {
+                headers: {
+                    'Authorization': `Basic ${token}`
+                }
+            })
+            .then(resp => {
+                console.log(resp.data);
+                setAddCart(resp.data);
+                // navigate("/viewCart");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart };
 
 }
 export default UseProductHook;

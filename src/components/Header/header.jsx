@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import { useState, useEffect } from "react";
 import UseProductHook from "../../hooks/useProductHooks";
 import Debounce from "../debounce";
-const Header = () => {
+const Header = ({ value }) => {
     const [search, setSearch] = useState("");
     const { searchFunc, setSearchData, searchData } = UseProductHook();
     useEffect(() => {
@@ -58,6 +58,7 @@ const Header = () => {
                                         <p className="mb-0">
                                             <button><NavLink className="text-white px-5" to="/login">Login</NavLink></button>
                                             <button><NavLink className="text-white px-5" to="/signup">Signup</NavLink></button>
+                                            <button>Cart {value}</button>
                                         </p>
                                     </Link>
                                 </div>

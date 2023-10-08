@@ -17,6 +17,7 @@ import Authentication from "./components/Authentication"
 import Header from './components/Header/header';
 import AddBook from './pages/addBook';
 import UpdateBook from './pages/updateBook';
+import ViewCart from './pages/viewCart';
 import "./App.css"
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/addBook" element={<AddBook />} />
           <Route path="/product" element={<Product />} />
           <Route path="/product/:updateId" element={<UpdateBook />} />
+          <Route path="/viewCart" element={<ViewCart />} />
         </Routes>
       </Router>
     </>
