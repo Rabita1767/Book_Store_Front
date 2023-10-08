@@ -1,7 +1,10 @@
 import { useForm, Controller } from "react-hook-form"
 import UseProductHook from "../hooks/useProductHooks";
+import { useDispatch } from "react-redux";
+import { addBookInfo } from "../redux/addBookSlice";
 import UseAuthHook from "../hooks/useAuthHook";
 const AddBook = () => {
+    const dispatch = useDispatch();
     const { addBookFunc, addBook } = UseAuthHook();
     const {
         control,
@@ -41,6 +44,7 @@ const AddBook = () => {
             discountEnd: getValues("discountEnd")
         }
         addBookFunc(data);
+        dispatch(addBookInfo(data))
     }
     return (
         <>

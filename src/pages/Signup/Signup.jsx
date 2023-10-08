@@ -1,4 +1,3 @@
-// import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
@@ -6,7 +5,6 @@ import Password from '../../components/form/password';
 const Signup = () => {
     const { signInfo } = UseAuthHook();
     const [passwordFieldType, setPasswordFieldType] = useState("password");
-    // const navigate = useNavigate();
     const {
         handleSubmit,
         control,
@@ -40,7 +38,6 @@ const Signup = () => {
 
         signup(data);
         console.log(signInfo);
-        // navigate("/login");
     }
 
     return (
