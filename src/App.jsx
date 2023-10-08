@@ -16,6 +16,7 @@ import Form from './pages/form';
 import Authentication from "./components/Authentication"
 import Header from './components/Header/header';
 import AddBook from './pages/addBook';
+import UpdateBook from './pages/updateBook';
 import "./App.css"
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/addBook" element={<AddBook />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:updateId" element={<UpdateBook />} />
         </Routes>
       </Router>
     </>

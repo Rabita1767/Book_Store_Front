@@ -124,7 +124,7 @@ const Login = () => {
     } = useForm({
         defaultValues: {
             email: "rabita@gmail.com",
-            password: "rabita@1234",
+            password: "Rabita@1234",
         },
     });
 

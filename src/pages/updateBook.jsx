@@ -1,57 +1,28 @@
-import { useForm, Controller } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form";
 import UseProductHook from "../hooks/useProductHooks";
-import { useDispatch } from "react-redux";
-import { addBookInfo } from "../redux/addBookSlice";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import Header from "../components/Header/header";
-const AddBook = () => {
-    const dispatch = useDispatch();
-    const { addBookFunc, addBook } = UseProductHook();
+const UpdateBook = () => {
+    const { updateId } = useParams();
+    const { upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo } = UseProductHook();
     useEffect(() => {
-        console.log(addBook)
-    }, [addBook])
+        console.log(upBook);
+    }, [upBook])
+    getBookInfo(updateId);
+
+    console.log(updateId);
     const {
-        control,
+        handleSubmit,
         formState: { errors },
         getValues,
-        handleSubmit,
-        watch
-    } = useForm({
-        defaultValues:
-        {
-            image: " ",
-            isbn: " ",
-            name: " ",
-            price: " ",
-            category: " ",
-            stock: " ",
-            author: " ",
-            publisher: " ",
-            discountPercentage: " ",
-
-        }
-    });
+        watch,
+        control
+    } = useForm()
     const handleonSubmit = (data) => {
-        // const data =
-        // {
-        //     image: getValues("image"),
-        //     isbn: getValues("isbn"),
-        //     name: getValues("name"),
-        //     price: getValues("price"),
-        //     category: getValues("category"),
-        //     stock: getValues("stock"),
-        //     author: getValues("author"),
-        //     publisher: getValues("publisher"),
-        //     discountPercentage: getValues("discountPercentage"),
-        //      discountStart: getValues("discountStart"),
-        //      discountEnd: getValues("discountEnd")
-        // }
-        addBookFunc(data);
-        dispatch(addBookInfo(addBook))
+        updatedBook(data)
     }
     return (
         <>
-            <Header />
             <form onSubmit={handleSubmit(handleonSubmit)}>
                 <div>
                     <h4>Enter Image</h4>
@@ -386,4 +357,4 @@ const AddBook = () => {
     )
 
 }
-export default AddBook;
+export default UpdateBook;

@@ -8,6 +8,9 @@ const UseProductHook = () => {
     const [isbn, setIsbn] = useState("");
     const [param, setParam] = useState([]);
     const [addBook, setAddBook] = useState("");
+    const [delBook, setDeleteBook] = useState("");
+    const [upBook, setUpBook] = useState("");
+    const [updatedBookInfo, setUpdatedBookInfo] = useState("");
     const fetchData = () => {
         axiosInstance.get("/auth/getAll")
             .then(resp => {
@@ -64,7 +67,38 @@ const UseProductHook = () => {
     useEffect(() => {
         console.log(addBook);
     }, [addBook])
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook };
+    const deleteBook = (id) => {
+        axiosInstance.delete(`/book/deleteBook/${id}`)
+            .then(resp => {
+                console.log(resp.data);
+                setDeleteBook(resp.data);
+                setProduct(prevProduct => prevProduct.filter(item => item._id !== id));
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const getBookInfo = (id) => {
+        axiosInstance.get(`/auth/getAll?id=${id}`)
+            .then(resp => {
+                console.log(resp.data)
+                setUpBook(resp.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const updatedBook = (formData, id) => {
+        axiosInstance.patch(`/book/updateBook?id=${id}`, formData)
+            .then(resp => {
+                console.log(resp.data)
+                setUpdatedBookInfo(resp.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo };
 
 }
 export default UseProductHook;

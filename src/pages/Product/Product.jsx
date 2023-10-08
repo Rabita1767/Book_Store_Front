@@ -3,22 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import Button from "../../components/ui/button";
 import UseProductHook from "../../hooks/useProductHooks";
 import "./product.css";
+import Header from "../../components/Header/header";
 const Product = () => {
     const navigate = useNavigate();
-    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading } = UseProductHook();
+    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook } = UseProductHook();
     useEffect(() => {
         fetchData();
     }, [])
-    const handleUpdate = (isbn, e) => {
-        e.preventDefault();
-        getBookData(isbn);
+    useEffect(() => {
+        console.log(delBook)
+    }, [product])
+    const handleUpdate = (id, e) => {
+        // getBookData(id);
+        navigate(`/product/${id}`)
 
     }
     // const navigation = () => {
     //     navigate(`/product/${item.isbn}`)
     // }
+    const handleDelete = (id) => {
+        deleteBook(id);
+    }
     return (
         <>
+            <Header />
             <div className="product-grid">
                 {product && product.map((item) => (
                     <div key={item.id} className="product-item">
@@ -26,10 +34,11 @@ const Product = () => {
                         <h3>{item.name}</h3>
                         <p>Category: {item.category}</p>
                         <p>Price: ${item.price}</p>
-                        <Button myFunc={() => handleUpdate(item.isbn)} text="Edit" />
+                        <Button myFunc={() => handleUpdate(item._id)} text="Edit" />
                         {/* <button onClick={() => handleUpdate(item.isbn)}>Edit</button> */}
-                        <Button myFunc={() => navigate(`/product/${item.isbn}`)} text="Details" />
+                        {/* <Button myFunc={() => navigate(`/product/${item.isbn}`)} text="Details" /> */}
                         {/* <button onClick={() => navigate(`/product/${item.isbn}`)}>Details</button> */}
+                        <button onClick={() => handleDelete(item._id)}>Delete</button>
                     </div>
                 ))}
             </div>
