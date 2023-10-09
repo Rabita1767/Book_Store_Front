@@ -1,29 +1,3 @@
-// import { createSlice } from "@reduxjs/toolkit";
-// import store from "./userStore";
-// const initialState =
-// {
-//     userName: "",
-//     email: "",
-//     token: "",
-//     role: ""
-// }
-// const userSlice = createSlice(
-//     {
-//         name: "userInfo",
-//         initialState,
-//         reducers:
-//         {
-//             addUserInfo: (state, action) => {
-//                 state.userName = action.payload.name,
-//                     state.email = action.payload.email,
-//                     state.token = action.payload.token,
-//                     state.role = action.payload.role
-//             }
-//         }
-//     }
-// )
-// export const { addUserInfo } = userSlice.actions;
-// export default userSlice.reducer;
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -38,13 +12,20 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         addUserInfo: (state, action) => {
-            state.userName = action.payload.name;
-            state.email = action.payload.email;
-            state.token = action.payload.token;
-            state.role = action.payload.role;
+            state.userName = action.payload.data.result.name;
+            state.email = action.payload.data.result.email;
+            state.token = action.payload.data.token;
+            state.role = action.payload.data.role;
+        },
+        clearUserInfo: (state) => {
+            // Reset the state to its initial values
+            state.userName = "";
+            state.email = "";
+            state.token = "";
+            state.role = "";
         }
     }
 });
 
-export const { addUserInfo } = userSlice.actions;
+export const { addUserInfo, clearUserInfo } = userSlice.actions;
 export default userSlice.reducer;

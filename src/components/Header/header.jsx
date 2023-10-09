@@ -1,9 +1,24 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaSearch } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UseProductHook from "../../hooks/useProductHooks";
 import Debounce from "../debounce";
+import { useDispatch } from "react-redux";
+import { clearUserInfo } from "../../redux/userSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import store from "../../redux/userStore";
+import "./header.scss"
 const Header = ({ value }) => {
+    const token = localStorage.getItem("token");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const data = useSelector((state) => {
+        return state.userInfo;
+
+    }
+    )
+    console.log(data);
     const [search, setSearch] = useState("");
     const { searchFunc, setSearchData, searchData } = UseProductHook();
     useEffect(() => {
@@ -14,6 +29,11 @@ const Header = ({ value }) => {
 
         return () => clearTimeout(timeOutFunc);
     }, [search]);
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        dispatch(clearUserInfo());
+        // navigate("/login");
+    }
     return (
         <>
             <header className="header-top-strip py-3">
@@ -56,8 +76,9 @@ const Header = ({ value }) => {
                                 <div>
                                     <Link>
                                         <p className="mb-0">
-                                            <button><NavLink className="text-white px-5" to="/login">Login</NavLink></button>
+                                            <button className={token ? "hidden" : "show"}><NavLink className="text-white px-5" to="/login">Login</NavLink></button>
                                             <button><NavLink className="text-white px-5" to="/signup">Signup</NavLink></button>
+                                            <button className={token ? "show" : "hidden"} onClick={() => handleLogout()}>Logout</button>
                                             <button>Cart {value}</button>
                                         </p>
                                     </Link>
@@ -73,11 +94,12 @@ const Header = ({ value }) => {
                         <div className="col-12">
                             <div className="menu-bottom d-flex align-items-center">
                                 <div className="menu-links">
-                                    <div className="d-flex align-items-center gap-35">
-                                        <NavLink className="text-white px-5" to="/">Home</NavLink>
-                                        <NavLink className="text-white px-5" to="/about">About</NavLink>
-                                        <NavLink className="text-white px-5" to="/product">Products</NavLink>
-                                        <NavLink className="text-white px-5" to="/filter">Filter</NavLink>
+                                    <div className="navbar">
+                                        <NavLink className="nav" to="/">Home</NavLink>
+                                        <NavLink className="nav" to="/about">About</NavLink>
+                                        <NavLink className="nav" to="/product">Products</NavLink>
+                                        <NavLink className="nav" to="/filter">Filter</NavLink>
+                                        <NavLink className="nav" to="/getAllUser">User List</NavLink>
                                         {/* <NavLink className="text-white px-5" to="/updateUser">Update User</NavLink> */}
                                     </div>
                                 </div>
