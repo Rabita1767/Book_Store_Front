@@ -33,12 +33,12 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/getAllUser" element={<User />} />
+          <Route path="/updateUser/:userId" element={<UpdateUser />} />
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
             <Route path="/product" element={<Product />} />
             <Route path="/product/:updateId" element={<UpdateBook />} />
             <Route path="/viewCart" element={<ViewCart />} />
-            <Route path="/updateUser" element={<UpdateUser />} />
           </Route>
         </Routes>
       </Router>

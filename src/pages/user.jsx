@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../util/AxiosInstance";
 import "./user.scss"
 const User = () => {
+    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState([])
     axiosInstance.get(`/book/getAllUser`)
         .then(resp => {
@@ -11,6 +13,9 @@ const User = () => {
         .catch(err => {
             console.log(err)
         })
+    const handleUpdate = (id) => {
+        navigate(`/updateUser/${id}`)
+    }
     return (
         <div className="user-container">
             <h1>User Information</h1>
