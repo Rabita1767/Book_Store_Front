@@ -126,16 +126,29 @@ const UpdateUser = () => {
     const [upUser, setUpuser] = useState("")
     const [updatedUser, setUpdatedUser] = useState("")
     const { userId } = useParams()
+    const {
+        getValues,
+        control,
+        handleSubmit,
+        watch,
+        formState: { errors },
+        setValue,
+
+    } = useForm()
     useEffect(() => {
         axiosInstance.get(`/book/getAllUser?id=${userId}`)
             .then(resp => {
                 console.log(resp.data.data)
                 setUpuser(resp.data.data)
+                setValue("name", resp.data.name);
+                setValue("email", resp.data.email);
+                setValue("phone", resp.data.phone);
+                setValue("balance", resp.data.balance);
             })
             .catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, [userId, setValue])
     const onSubmit = (data) => {
         axiosInstance.patch(`book/updateUser?id=${userId}`, data)
             .then(resp => {
@@ -146,14 +159,6 @@ const UpdateUser = () => {
                 console.log(err);
             })
     }
-    const {
-        getValues,
-        control,
-        handleSubmit,
-        watch,
-        formState: { errors }
-
-    } = useForm()
     console.log(upUser)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -162,7 +167,6 @@ const UpdateUser = () => {
                 <Controller
                     name="name"
                     control={control}
-                    defaultValue={upUser.name}
                     render={({ field }) => (
                         <input
                             type="text"
@@ -178,7 +182,6 @@ const UpdateUser = () => {
                 <Controller
                     name="email"
                     control={control}
-                    defaultValue={upUser.email || ""}
                     render={({ field }) => (
                         <input
                             type="text"
@@ -194,7 +197,6 @@ const UpdateUser = () => {
                 <Controller
                     name="phone"
                     control={control}
-                    defaultValue={upUser.phone || ""}
                     render={({ field }) => (
                         <input
                             type="text"
@@ -210,7 +212,6 @@ const UpdateUser = () => {
                 <Controller
                     name="balance"
                     control={control}
-                    defaultValue={upUser.balance || ""}
                     render={({ field }) => (
                         <input
                             type="text"

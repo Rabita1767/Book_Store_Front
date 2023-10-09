@@ -9,7 +9,10 @@ const UpdateBook = () => {
     useEffect(() => {
         console.log(upBook);
     }, [upBook])
-    getBookInfo(updateId);
+    useEffect(() => {
+        getBookInfo(updateId);
+    }, [])
+    // getBookInfo(updateId);
 
     console.log(updateId);
     // const defaultValues = {
