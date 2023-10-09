@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../util/AxiosInstance";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 const UseProductHook = () => {
+
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const [loading, setLoading] = useState(false);
@@ -15,6 +17,9 @@ const UseProductHook = () => {
     const [upBook, setUpBook] = useState("");
     const [updatedBookInfo, setUpdatedBookInfo] = useState("");
     const [addCart, setAddCart] = useState("")
+    const [viewCart, setViewCart] = useState([])
+    const [nextPagination, setNextPagination] = useState([])
+    const [upUser, setUpUser] = useState("")
     const fetchData = () => {
         axiosInstance.get("/auth/getAll")
             .then(resp => {
@@ -106,7 +111,7 @@ const UseProductHook = () => {
         axiosInstance.post("/cart/addToCart", formData,
             {
                 headers: {
-                    'Authorization': `Basic ${token}`
+                    'Authorization': `Bearer ${token}`
                 }
             })
             .then(resp => {
@@ -118,7 +123,42 @@ const UseProductHook = () => {
                 console.log(err);
             })
     }
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart };
+    const CartItem = () => {
+        axiosInstance.get("/cart/viewCart",
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(resp => {
+                console.log(resp.data)
+                setViewCart(resp.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    const fetchNext = (pCount) => {
+        axiosInstance.get(`/auth/getAll?page=${pCount}&limit=${5}`)
+            .then(resp => {
+                console.log(resp.data.data)
+                setNextPagination(resp.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const updateUser = (formData) => {
+        axiosInstance.patch("/book/updateUser", formData)
+            .then(resp => {
+                console.log(resp.data)
+                setUpUser(resp.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser };
 
 }
 export default UseProductHook;

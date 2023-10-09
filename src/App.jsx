@@ -18,6 +18,9 @@ import Header from './components/Header/header';
 import AddBook from './pages/addBook';
 import UpdateBook from './pages/updateBook';
 import ViewCart from './pages/viewCart';
+import Authenticate from './components/Authentication';
+import UpdateUser from './pages/updateUser';
+import User from './pages/user';
 import "./App.css"
 
 function App() {
@@ -29,10 +32,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/addBook" element={<AddBook />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/product/:updateId" element={<UpdateBook />} />
-          <Route path="/viewCart" element={<ViewCart />} />
+          <Route path="/getAllUser" element={<User />} />
+          <Route element={<Authenticate />}>
+            <Route path="/addBook" element={<AddBook />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/product/:updateId" element={<UpdateBook />} />
+            <Route path="/viewCart" element={<ViewCart />} />
+            <Route path="/updateUser" element={<UpdateUser />} />
+          </Route>
         </Routes>
       </Router>
     </>

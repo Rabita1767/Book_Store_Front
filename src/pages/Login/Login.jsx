@@ -133,7 +133,6 @@ const Login = () => {
     useEffect(() => {
         console.log(logInfo);
     }, [logInfo]);
-
     const handlerSubmit = (data) => {
         // const data = {
         //     email: getValues("email"),

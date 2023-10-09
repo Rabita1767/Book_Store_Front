@@ -78,6 +78,7 @@ const Header = ({ value }) => {
                                         <NavLink className="text-white px-5" to="/about">About</NavLink>
                                         <NavLink className="text-white px-5" to="/product">Products</NavLink>
                                         <NavLink className="text-white px-5" to="/filter">Filter</NavLink>
+                                        {/* <NavLink className="text-white px-5" to="/updateUser">Update User</NavLink> */}
                                     </div>
                                 </div>
 

@@ -6,11 +6,21 @@ import "./product.css";
 import Header from "../../components/Header/header";
 const Product = () => {
     const [count, setCount] = useState(0);
+    const [prev, setPrev] = useState(0);
+    const [next, setNext] = useState(1)
     const navigate = useNavigate();
-    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook, myCart, setAddCart, addCart } = UseProductHook();
+    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook, myCart, setAddCart, addCart, fetchNext, nextPagination, setNextPagination } = UseProductHook();
+    // useEffect(() => {
+    //     fetchData();
+    // }, [])
     useEffect(() => {
-        fetchData();
+        // setNext(next + 1)
+        // setPrev(next)
+        fetchNext(next)
     }, [])
+    useEffect(() => {
+        console.log(nextPagination)
+    }, [nextPagination])
     useEffect(() => {
         console.log(delBook)
     }, [product])
@@ -41,11 +51,22 @@ const Product = () => {
         console.log("clicked")
         myCart(data);
     }
+    const handleNext = () => {
+        setNext(next + 1)
+        setPrev(next + 1)
+        fetchNext(next + 1)
+    }
+    const handlePrev = () => {
+        setPrev(prev - 1)
+        setNext(prev - 1)
+        fetchNext(prev - 1);
+    }
+
     return (
         <>
             <Header value={count} />
             <div className="product-grid">
-                {product && product.map((item) => (
+                {nextPagination && nextPagination.map((item) => (
                     <div key={item.id} className="product-item">
                         <img src={item.image} alt={item.name} />
                         <h3>{item.name}</h3>
@@ -59,6 +80,11 @@ const Product = () => {
                         <button onClick={() => handleCart(item._id)}>Add to Cart</button>
                     </div>
                 ))}
+            </div>
+            <div>
+                {/* <button onClick={() => handlePrev()}>Prev</button> */}
+                <button disabled={prev <= 0 ? true : false} onClick={() => handlePrev()} className={prev <= 0 ? "active" : "disabled"}>Prev</button>
+                <button onClick={() => handleNext()}>Next</button>
             </div>
         </>
     );
