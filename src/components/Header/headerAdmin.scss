@@ -1,0 +1,83 @@
+// NavigationBar.scss
+
+nav {
+    background-color: #00796B;
+    /* Change to a color appropriate for a book library */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    /* Increase the vertical padding for a taller navbar */
+
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        margin: 0;
+
+        li {
+            margin: 0 10px;
+
+            a {
+                text-decoration: none;
+                color: #fff;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .showNav {
+        display: block;
+    }
+
+    .hiddenNav {
+        display: none;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+
+        input[type="text"] {
+            padding: 15px;
+            /* Increase the padding for a taller input field */
+            border: none;
+            border-radius: 50px;
+            /* Make the edges rounder */
+            margin-right: 10px;
+            width: 300px;
+            /* Increase the width of the input field */
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #333;
+            /* Change text color for better visibility on lighter background */
+
+            &:focus {
+                background-color: rgba(255, 255, 255, 0.2);
+                outline: none;
+            }
+        }
+
+        button {
+            background-color: #00796B;
+            /* Use the same color as the navbar */
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            /* Make the edges rounder */
+            padding: 15px 20px;
+            /* Increase padding for a larger button */
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #005A4B;
+                /* Darker shade for hover effect */
+            }
+        }
+    }
+}

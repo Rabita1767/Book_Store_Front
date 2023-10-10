@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../util/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const UseProductHook = () => {
 
     const navigate = useNavigate();
@@ -73,8 +75,12 @@ const UseProductHook = () => {
             .then(resp => {
                 console.log(resp.data);
                 setAddBook(resp.data);
+                toast(resp.data.message)
             })
-            .catch(err => { console.log(err) })
+            .catch(err => {
+                console.log(err)
+                toast(err)
+            })
     }
     useEffect(() => {
         console.log(addBook);
@@ -124,6 +130,36 @@ const UseProductHook = () => {
             })
             .catch(err => {
                 console.log(err);
+            })
+    }
+    const myCartAdd = (formData) => {
+        axiosInstance.post("/cart/addToCart", formData,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(resp => {
+                console.log(resp.data);
+                setAddCart(resp.data);
+                // navigate("/viewCart");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        axiosInstance.get("/cart/viewCart",
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(resp => {
+                console.log(resp.data)
+                setViewCart(resp.data)
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
     const CartItem = () => {
@@ -203,12 +239,16 @@ const UseProductHook = () => {
             .then(resp => {
                 console.log(resp.data)
                 setCheckOut(resp.data);
+                if (resp.data.success) {
+                    toast(resp.data.message)
+                }
             })
             .catch(err => {
                 console.log(err);
+                toast(err.response.data.message);
             })
     }
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser, addProductDiscount, setDiscount, discount, viewCartInfo, cartItem, setCartItem, checkout, setCheckOut, handleCheckout };
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser, addProductDiscount, setDiscount, discount, viewCartInfo, cartItem, setCartItem, checkout, setCheckOut, handleCheckout, myCartAdd };
 
 }
 export default UseProductHook;

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUserInfo } from "../redux/userSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const UseAuthHook = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,10 +39,15 @@ const UseAuthHook = () => {
                 console.log(logInfo);
                 // navigate("/addBook");
                 if (resp.data.success) {
-                    navigate("/addBook");
+                    toast(resp.data.message)
+                    navigate("/");
                 }
+
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                toast(err.response.data.message);
+            });
     };
     return { signup, signInfo, setSignInfo, login, logInfo };
 };

@@ -9,6 +9,7 @@ const Product = () => {
     const [prev, setPrev] = useState(0);
     const [next, setNext] = useState(1)
     const navigate = useNavigate();
+    const role = localStorage.getItem("role");
     const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook, myCart, setAddCart, addCart, fetchNext, nextPagination, setNextPagination } = UseProductHook();
     // useEffect(() => {
     //     fetchData();
@@ -72,16 +73,18 @@ const Product = () => {
                         <h3>{item.name}</h3>
                         <p>Category: {item.category}</p>
                         <p>Price: ${item.price}</p>
-                        <Button myFunc={() => handleUpdate(item._id)} text="Edit" />
-                        {/* <button onClick={() => handleUpdate(item.isbn)}>Edit</button> */}
-                        {/* <Button myFunc={() => navigate(`/product/${item.isbn}`)} text="Details" /> */}
-                        {/* <button onClick={() => navigate(`/product/${item.isbn}`)}>Details</button> */}
-                        <button onClick={() => handleDelete(item._id)}>Delete</button>
-                        <button onClick={() => handleCart(item._id)}>Add to Cart</button>
+                        <div className="button-container">
+                            {/* <Button className={role == 1 ? "show" : "hidden"} myFunc={() => handleUpdate(item._id)} text="Edit" /> */}
+                            <button className={role == 1 ? "show" : "hidden"} onClick={() => handleUpdate(item._id)}>Edit</button>
+                            {/* <Button myFunc={() => navigate(`/product/${item.isbn}`)} text="Details" /> */}
+                            {/* <button onClick={() => navigate(`/product/${item.isbn}`)}>Details</button> */}
+                            <button className={role == 1 ? "show" : "hidden"} onClick={() => handleDelete(item._id)}>Delete</button>
+                            <button className={role == 1 ? "hidden" : "show"} onClick={() => handleCart(item._id)}>Add to Cart</button>
+                        </div>
                     </div>
                 ))}
             </div>
-            <div>
+            <div className="pagination">
                 {/* <button onClick={() => handlePrev()}>Prev</button> */}
                 <button disabled={prev <= 0 ? true : false} onClick={() => handlePrev()} className={prev <= 0 ? "active" : "disabled"}>Prev</button>
                 <button onClick={() => handleNext()}>Next</button>

@@ -23,14 +23,19 @@ import UpdateUser from './pages/updateUser';
 import User from './pages/user';
 import AddDiscount from './pages/addDiscount';
 import Checkout from './pages/checkout';
+import HeaderAdmin from './components/Header/headerAdmin';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css"
 
 function App() {
 
   return (
     <>
+      <ToastContainer />
       <Router>
         <Routes>
+
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

@@ -76,14 +76,9 @@ const AddBook = () => {
                         rules={
                             {
                                 required: "ISBN is missing",
-                                minLength:
-                                {
-                                    value: 13,
-                                    message: "Minnimum Length will be 13"
-                                },
                                 maxLength:
                                 {
-                                    value: 13,
+                                    value: 14,
                                     message: "Maximum Length will be 13"
                                 }
                             }

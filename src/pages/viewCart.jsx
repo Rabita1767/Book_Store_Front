@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const ViewCart = () => {
     const navigate = useNavigate();
-    const { viewCartInfo, cartItem, setCartItem } = UseProductHook();
+    const { viewCartInfo, cartItem, setCartItem, myCartAdd, addCart, setAddCart, myCart } = UseProductHook();
     useEffect(() => {
         viewCartInfo();
     }, [])
@@ -12,6 +12,27 @@ const ViewCart = () => {
     }, [cartItem])
     const navigateCheckOut = () => {
         navigate("/checkout")
+    }
+    const increaseQuantity = (id) => {
+        const data =
+        {
+            "products":
+                [
+                    {
+                        "p_id": id,
+                        "quantity": 1
+                    }
+                ]
+        }
+        console.log("clickeds")
+        // myCartAdd(data);
+        myCart(data);
+        useEffect(() => {
+            console.log(addCart);
+        }, [addCart])
+        useEffect(() => {
+            viewCartInfo()
+        }, [addCart])
     }
     return (
         <div>
@@ -29,6 +50,10 @@ const ViewCart = () => {
                             <tr key={product.p_id}>
                                 <td>{product.p_id}</td>
                                 <td>{product.quantity}</td>
+                                <td>
+                                    <button onClick={() => increaseQuantity(product.p_id)}>+</button>
+                                    {/* <button onClick={() => decreaseQuantity(product.p_id)}>-</button> */}
+                                </td>
                             </tr>
                         ))}
                 </tbody>

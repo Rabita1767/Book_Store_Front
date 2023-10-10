@@ -1,38 +1,55 @@
-/* UserTable.scss */
+// Your component.scss file
 
-// Style the table
 .user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto; // Center the table horizontally
     text-align: center;
-    /* Center-align the content */
-    margin-top: 20px;
-}
 
-h1 {
-    margin-bottom: 20px;
-    /* Add some spacing below the title */
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 1px solid #ddd;
-
-    // Style the table headers
-    th {
-        background-color: #f2f2f2;
-        text-align: left;
-        padding: 8px;
+    h1 {
+        color: #00796B; // Title color
+        border-bottom: 2px solid #00796B; // Border under the title
+        padding-bottom: 1rem; // Add some spacing under the title
     }
 
-    // Style the table cells
-    td {
-        border: 1px solid #ddd;
-        padding: 8px;
+    table {
+        width: 100%;
+        border: 2px solid #00796B; // Table border
+        border-collapse: collapse;
+
+        th {
+            background-color: #00796B; // Header background color
+            color: white; // Header text color
+            border: 2px solid #00524D; // Header border
+        }
+
+        tr {
+            background-color: #00524D; // Row background color
+            color: white; // Row text color
+            border-bottom: 2px solid #00796B; // Row border
+
+            &:nth-child(even) {
+                background-color: #00796B; // Alternate row background color
+            }
+        }
+
+        td {
+            padding: 0.5rem;
+            border: 2px solid #00796B; // Cell border
+        }
     }
 
-    // Alternate row background color
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
+    button {
+        background-color: #00796B;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        margin-right: 0.5rem;
+
+        &:hover {
+            background-color: #00524D;
+        }
     }
 }

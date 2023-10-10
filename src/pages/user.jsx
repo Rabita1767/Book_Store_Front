@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../util/AxiosInstance";
 import Header from "../components/Header/header";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./user.scss"
 const User = () => {
     const token = localStorage.getItem("token");
@@ -33,10 +35,13 @@ const User = () => {
                 console.log(resp.data)
                 setDeleteUser(resp.data)
                 setUserInfo(prevUser => prevUser.filter(user => user._id !== id));
+                toast("User has been deleted")
             })
             .catch(err => {
                 console.log(err);
+                toast("Request Unsuccessful!")
             })
+
     }
     return (
         <>
@@ -71,6 +76,7 @@ const User = () => {
                     </tbody>
                 </table>
             </div>
+            <ToastContainer />
         </>
     );
 }
