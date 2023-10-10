@@ -23,7 +23,7 @@ import UpdateUser from './pages/updateUser';
 import User from './pages/user';
 import AddDiscount from './pages/addDiscount';
 import Checkout from './pages/checkout';
-import HeaderAdmin from './components/Header/headerAdmin';
+import AddBalanceUser from './pages/addBalanceUser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css"
@@ -42,6 +42,7 @@ function App() {
           <Route path="/getAllUser" element={<User />} />
           <Route path="/updateUser/:userId" element={<UpdateUser />} />
           <Route path="/addDiscount" element={<AddDiscount />} />
+          <Route path="addBalanceUser" element={<AddBalanceUser />} />
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
             <Route path="/product" element={<Product />} />
