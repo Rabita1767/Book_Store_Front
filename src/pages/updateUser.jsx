@@ -122,7 +122,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axiosInstance from "../util/AxiosInstance";
+import { useNavigate } from "react-router-dom";
 const UpdateUser = () => {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
     const [upUser, setUpuser] = useState("")
     const [updatedUser, setUpdatedUser] = useState("")
     const { userId } = useParams()
@@ -134,26 +137,45 @@ const UpdateUser = () => {
         formState: { errors },
         setValue,
 
-    } = useForm()
+    } = useForm(
+        {
+            defaultValues:
+            {
+                name: "",
+                email: "",
+                phone: "",
+                balance: ""
+            }
+        }
+    )
     useEffect(() => {
-        axiosInstance.get(`/book/getAllUser?id=${userId}`)
+        axiosInstance.get(`/book/getUserById?id=${userId}`)
             .then(resp => {
                 console.log(resp.data.data)
                 setUpuser(resp.data.data)
-                setValue("name", resp.data.name);
-                setValue("email", resp.data.email);
-                setValue("phone", resp.data.phone);
-                setValue("balance", resp.data.balance);
+                setValue("name", resp.data.data.name);
+                setValue("email", resp.data.data.email);
+                setValue("phone", resp.data.data.phone);
+                setValue("balance", resp.data.data.balance);
+
             })
             .catch(err => {
                 console.log(err);
             })
     }, [userId, setValue])
     const onSubmit = (data) => {
-        axiosInstance.patch(`book/updateUser?id=${userId}`, data)
+        axiosInstance.post(`book/updateUser?id=${userId}`, data,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             .then(resp => {
                 console.log(resp.data)
                 setUpdatedUser(resp.data)
+                if (resp.data.success) {
+                    navigate("/")
+                }
             })
             .catch(err => {
                 console.log(err);

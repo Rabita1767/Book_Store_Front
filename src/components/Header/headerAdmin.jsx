@@ -9,7 +9,7 @@ import { clearUserInfo } from "../../redux/userSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import store from "../../redux/userStore";
 import "./header.scss"
-const Header = ({ value }) => {
+const HeaderAdmin = ({ value }) => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
     // const role = useSelector((state) =>
@@ -133,4 +133,4 @@ const Header = ({ value }) => {
     )
 
 }
-export default Header;
+export default HeaderAdmin;

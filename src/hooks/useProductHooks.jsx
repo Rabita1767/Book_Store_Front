@@ -20,6 +20,9 @@ const UseProductHook = () => {
     const [viewCart, setViewCart] = useState([])
     const [nextPagination, setNextPagination] = useState([])
     const [upUser, setUpUser] = useState("")
+    const [discount, setDiscount] = useState("")
+    const [cartItem, setCartItem] = useState("")
+    const [checkout, setCheckOut] = useState("");
     const fetchData = () => {
         axiosInstance.get("/auth/getAll")
             .then(resp => {
@@ -158,7 +161,54 @@ const UseProductHook = () => {
                 console.log(err)
             })
     }
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser };
+    const addProductDiscount = (formData) => {
+        axiosInstance.post(`book/addDiscount`, formData,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(resp => {
+                console.log(resp.data)
+                setDiscount(resp.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    const viewCartInfo = () => {
+        axiosInstance.get("/cart/viewCart",
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
+            .then(resp => {
+                console.log(resp.data.data)
+                setCartItem(resp.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const handleCheckout = () => {
+        axiosInstance.get("/cart/checkout",
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
+            .then(resp => {
+                console.log(resp.data)
+                setCheckOut(resp.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser, addProductDiscount, setDiscount, discount, viewCartInfo, cartItem, setCartItem, checkout, setCheckOut, handleCheckout };
 
 }
 export default UseProductHook;

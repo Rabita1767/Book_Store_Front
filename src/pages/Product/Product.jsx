@@ -48,7 +48,7 @@ const Product = () => {
                 ]
         }
         setCount(count + 1);
-        console.log("clicked")
+        console.log("clickeds")
         myCart(data);
     }
     const handleNext = () => {

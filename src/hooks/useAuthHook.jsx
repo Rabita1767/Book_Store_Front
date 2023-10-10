@@ -33,6 +33,7 @@ const UseAuthHook = () => {
                 console.log(resp.data.data.token);
                 console.log(resp.data.data.result);
                 localStorage.setItem("token", resp.data.data.token, resp.data);
+                localStorage.setItem("role", resp.data.data.role)
                 console.log(logInfo);
                 // navigate("/addBook");
                 if (resp.data.success) {

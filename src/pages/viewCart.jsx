@@ -1,31 +1,47 @@
+import UseProductHook from "../hooks/useProductHooks"
 import { useEffect } from "react";
-import UseProductHook from "../hooks/useProductHooks";
+import { useNavigate } from "react-router-dom";
 const ViewCart = () => {
-    const { CartItem, viewCart, setViewCart } = UseProductHook()
+    const navigate = useNavigate();
+    const { viewCartInfo, cartItem, setCartItem } = UseProductHook();
     useEffect(() => {
-        CartItem()
+        viewCartInfo();
     }, [])
     useEffect(() => {
-        console.log(viewCart)
-    }, [viewCart])
+        console.log(cartItem.products)
+    }, [cartItem])
+    const navigateCheckOut = () => {
+        navigate("/checkout")
+    }
     return (
-        // <div>
-        //     <h1>Rabita</h1>
-        //     <div>
-        //         {viewCart.data && viewCart.data.products ? (
-        //             viewCart.data.products.map((item) => (
-        //                 <h1>{item.p_id}</h1>
-        //             ))
-        //         ) : (
-        //             <p>Loading...</p>
-        //         )}
-        //     </div>
-        // </div>
-        <>
-            <h1>Cart Item</h1>
-        </>
-    )
-
+        <div>
+            <h2>Your Cart</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {cartItem.products &&
+                        cartItem.products.map((product) => (
+                            <tr key={product.p_id}>
+                                <td>{product.p_id}</td>
+                                <td>{product.quantity}</td>
+                            </tr>
+                        ))}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan="2">Total Price:</td>
+                        <td>{cartItem.totalPrice}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button onClick={navigateCheckOut}>Proceed to Checkout</button>
+        </div>
+    );
 
 }
-export default ViewCart;
+export default ViewCart

@@ -21,6 +21,8 @@ import ViewCart from './pages/viewCart';
 import Authenticate from './components/Authentication';
 import UpdateUser from './pages/updateUser';
 import User from './pages/user';
+import AddDiscount from './pages/addDiscount';
+import Checkout from './pages/checkout';
 import "./App.css"
 
 function App() {
@@ -34,11 +36,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/getAllUser" element={<User />} />
           <Route path="/updateUser/:userId" element={<UpdateUser />} />
+          <Route path="/addDiscount" element={<AddDiscount />} />
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
             <Route path="/product" element={<Product />} />
             <Route path="/product/:updateId" element={<UpdateBook />} />
             <Route path="/viewCart" element={<ViewCart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Route>
         </Routes>
       </Router>
