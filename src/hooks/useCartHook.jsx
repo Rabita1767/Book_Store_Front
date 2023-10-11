@@ -28,6 +28,19 @@ const UseCartHook = () => {
             console.log(err);
         }
     }
+    const addItemByDecrease = async (formData) => {
+        try {
+            const resp = await axiosInstance.delete("/cart/removeFromCart", formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log(resp.data);
+            return resp.data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const viewCartItem = async () => {
         try {
             const resp = await axiosInstance.get("/cart/viewCart",
@@ -42,7 +55,7 @@ const UseCartHook = () => {
             console.log(err);
         }
     }
-    return { addItemByIncrease, viewCartItem }
+    return { addItemByIncrease, addItemByDecrease, viewCartItem }
 
 }
 export default UseCartHook;

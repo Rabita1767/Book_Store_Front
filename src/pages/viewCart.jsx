@@ -6,7 +6,7 @@ const ViewCart = () => {
     const navigate = useNavigate();
     const [cnt, setCnt] = useState(0);
     const [cartData, setCartData] = useState("");
-    const { addItemByIncrease, viewCartItem } = UseCartHook();
+    const { addItemByIncrease, addItemByDecrease, viewCartItem } = UseCartHook();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -45,6 +45,28 @@ const ViewCart = () => {
     }
     console.log(cartData)
 
+    const decreaseQuantity = async (p_id) => {
+        setCnt(cnt + 1);
+        const data =
+        {
+            "products":
+                [
+                    {
+                        "p_id": p_id,
+                        "quantity": 1
+                    }
+                ]
+        }
+        const response = await addItemByDecrease(data)
+        console.log(response);
+        if (response.success) {
+            const viewResponse = await viewCartItem();
+            console.log(viewResponse.data);
+            setCartData(viewResponse.data)
+        }
+
+    }
+
     return (
         <div>
             <h2>Your Cart</h2>
@@ -63,7 +85,7 @@ const ViewCart = () => {
                                 <td>{product.quantity}</td>
                                 <td>
                                     <button onClick={() => increaseQuantity(product.p_id)}>+</button>
-                                    {/* <button onClick={() => decreaseQuantity(product.p_id)}>-</button> */}
+                                    <button onClick={() => decreaseQuantity(product.p_id)}>-</button>
                                 </td>
                             </tr>
                         ))}
