@@ -62,7 +62,7 @@ const UseProductHook = () => {
             .catch(err => { console.log(err) })
     }
     const fetchProductById = (productId) => {
-        axiosInstance.get(`/auth/getAll?isbn=${productId}`)
+        axiosInstance.get(`/auth/getAll?id=${productId}`)
             .then(resp => {
                 console.log(resp.data.data);
                 setParam(resp.data.data)

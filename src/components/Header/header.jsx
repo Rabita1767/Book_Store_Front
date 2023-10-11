@@ -37,6 +37,7 @@ const Header = ({ value }) => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("id")
         dispatch(clearUserInfo());
         navigate("/login");
     }
@@ -143,6 +144,7 @@ const Header = ({ value }) => {
                 <li className={role == 1 ? "show" : "hidden"}><Link to="/updateDiscount">Update Discount</Link></li>
                 <li className={role == 1 ? "hidden" : "show"}><Link to="/product">Available Books</Link></li>
                 <li className={role == 1 ? "hidden" : "show"}><Link to="/addBalanceUser">Add Balance</Link></li>
+                <li className={role == 1 ? "hidden" : "show"}><Link to="/viewTransaction">View Transaction</Link></li>
                 <button className={token ? "hidden" : "show"} onClick={() => navigate("/login")}>Login</button>
                 <button><Link className="text-white px-5" to="/signup">Signup</Link></button>
                 <button className={token ? "show" : "hidden"} onClick={() => handleLogout()}>Logout</button>

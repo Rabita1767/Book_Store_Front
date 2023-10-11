@@ -1,0 +1,15 @@
+.product-grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-grid th,
+.product-grid td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.product-grid thead {
+    background-color: #f2f2f2;
+}

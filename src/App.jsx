@@ -26,6 +26,7 @@ import Checkout from './pages/checkout';
 import AddBalanceUser from './pages/addBalanceUser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ViewTransaction from './pages/viewTransaction';
 import "./App.css"
 
 function App() {
@@ -46,9 +47,11 @@ function App() {
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
             <Route path="/product" element={<Product />} />
+            <Route path="/product/:productId" element={<ProductDetails />} />
             <Route path="/product/:updateId" element={<UpdateBook />} />
             <Route path="/viewCart" element={<ViewCart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/viewTransaction" element={<ViewTransaction />} />
           </Route>
         </Routes>
       </Router>

@@ -1,39 +1,50 @@
 import UseProductHook from "../hooks/useProductHooks"
-import { useEffect } from "react";
+import UseCartHook from "../hooks/useCartHook";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const ViewCart = () => {
     const navigate = useNavigate();
-    const { viewCartInfo, cartItem, setCartItem, myCartAdd, addCart, setAddCart, myCart } = UseProductHook();
+    const [cnt, setCnt] = useState(0);
+    const [cartData, setCartData] = useState("");
+    const { addItemByIncrease, viewCartItem } = UseCartHook();
     useEffect(() => {
-        viewCartInfo();
-    }, [])
-    useEffect(() => {
-        console.log(cartItem.products)
-    }, [cartItem])
+        const fetchData = async () => {
+            try {
+                const data = await viewCartItem();
+                console.log(data);
+                setCartData(data.data)
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
     const navigateCheckOut = () => {
         navigate("/checkout")
     }
-    const increaseQuantity = (id) => {
+    const increaseQuantity = async (p_id) => {
+        setCnt(cnt + 1);
         const data =
         {
             "products":
                 [
                     {
-                        "p_id": id,
+                        "p_id": p_id,
                         "quantity": 1
                     }
                 ]
         }
-        console.log("clickeds")
-        // myCartAdd(data);
-        myCart(data);
-        useEffect(() => {
-            console.log(addCart);
-        }, [addCart])
-        useEffect(() => {
-            viewCartInfo()
-        }, [addCart])
+        const response = await addItemByIncrease(data)
+        console.log(response);
+        if (response.success) {
+            const viewResponse = await viewCartItem();
+            console.log(viewResponse.data);
+            setCartData(viewResponse.data)
+        }
+
     }
+    console.log(cartData)
+
     return (
         <div>
             <h2>Your Cart</h2>
@@ -45,8 +56,8 @@ const ViewCart = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cartItem.products &&
-                        cartItem.products.map((product) => (
+                    {cartData.products &&
+                        cartData.products.map((product) => (
                             <tr key={product.p_id}>
                                 <td>{product.p_id}</td>
                                 <td>{product.quantity}</td>
@@ -60,7 +71,7 @@ const ViewCart = () => {
                 <tfoot>
                     <tr>
                         <td colSpan="2">Total Price:</td>
-                        <td>{cartItem.totalPrice}</td>
+                        <td>{cartData.totalPrice}</td>
                     </tr>
                 </tfoot>
             </table>

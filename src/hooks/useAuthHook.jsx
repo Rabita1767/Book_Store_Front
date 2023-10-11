@@ -7,10 +7,12 @@ import { addUserInfo } from "../redux/userSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const UseAuthHook = () => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [signInfo, setSignInfo] = useState("");
     const [logInfo, setLoginInfo] = useState("");
+
     const signup = (formData) => {
         axiosInstance
             .post("/auth/signup", formData)
@@ -36,6 +38,7 @@ const UseAuthHook = () => {
                 console.log(resp.data.data.result);
                 localStorage.setItem("token", resp.data.data.token, resp.data);
                 localStorage.setItem("role", resp.data.data.role)
+                localStorage.setItem("id", resp.data.data.result._id)
                 console.log(logInfo);
                 // navigate("/addBook");
                 if (resp.data.success) {
@@ -49,6 +52,7 @@ const UseAuthHook = () => {
                 toast(err.response.data.message);
             });
     };
+
     return { signup, signInfo, setSignInfo, login, logInfo };
 };
 export default UseAuthHook;

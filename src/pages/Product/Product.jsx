@@ -77,7 +77,7 @@ const Product = () => {
                             {/* <Button className={role == 1 ? "show" : "hidden"} myFunc={() => handleUpdate(item._id)} text="Edit" /> */}
                             <button className={role == 1 ? "show" : "hidden"} onClick={() => handleUpdate(item._id)}>Edit</button>
                             {/* <Button myFunc={() => navigate(`/product/${item.isbn}`)} text="Details" /> */}
-                            {/* <button onClick={() => navigate(`/product/${item.isbn}`)}>Details</button> */}
+                            <button onClick={() => navigate(`/product/${item._id}`)}>Details</button>
                             <button className={role == 1 ? "show" : "hidden"} onClick={() => handleDelete(item._id)}>Delete</button>
                             <button className={role == 1 ? "hidden" : "show"} onClick={() => handleCart(item._id)}>Add to Cart</button>
                         </div>
