@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import UseProductHook from "../../hooks/useProductHooks";
 import Debounce from "../debounce";
+import Debounce1 from "../debounce1";
 import { useDispatch } from "react-redux";
 import { clearUserInfo } from "../../redux/userSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
@@ -133,33 +134,35 @@ const Header = ({ value }) => {
     //         </header>
     //     </>
     // )
+
     return (
-        <nav>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li className={role == 1 ? "show" : "hidden"} ><Link to="/getAllUser">Users</Link></li>
-                <li className={role == 1 ? "show" : "hidden"}><Link to="/product">Books</Link></li>
-                <li className={role == 1 ? "show" : "hidden"}><Link to="/addBook">Add New Book</Link></li>
-                <li className={role == 1 ? "show" : "hidden"}><Link to="/addDiscount">Add Discount</Link></li>
-                <li className={role == 1 ? "show" : "hidden"}><Link to="/updateDiscount">Update Discount</Link></li>
-                <li className={role == 1 ? "hidden" : "show"}><Link to="/product">Available Books</Link></li>
-                <li className={role == 1 ? "hidden" : "show"}><Link to="/addBalanceUser">Add Balance</Link></li>
-                <li className={role == 1 ? "hidden" : "show"}><Link to="/viewTransaction">View Transaction</Link></li>
-                <button className={token ? "hidden" : "show"} onClick={() => navigate("/login")}>Login</button>
-                <button><Link className="text-white px-5" to="/signup">Signup</Link></button>
-                <button className={token ? "show" : "hidden"} onClick={() => handleLogout()}>Logout</button>
-                <button className={role == 1 ? "hidden" : "show"} onClick={() => navigate("/viewCart")}>Cart{value} </button>
-            </ul>
-            <div>
-                {/* <input
+        <>
+            <nav>
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li className={role == 1 ? "show" : "hidden"} ><Link to="/getAllUser">Users</Link></li>
+                    <li className={role == 1 ? "show" : "hidden"}><Link to="/product">Books</Link></li>
+                    <li className={role == 1 ? "show" : "hidden"}><Link to="/addBook">Add New Book</Link></li>
+                    <li className={role == 1 ? "show" : "hidden"}><Link to="/addDiscount">Add Discount</Link></li>
+                    <li className={role == 1 ? "show" : "hidden"}><Link to="/updateDiscount">Update Discount</Link></li>
+                    <li className={role == 1 ? "hidden" : "show"}><Link to="/product">Available Books</Link></li>
+                    <li className={role == 1 ? "hidden" : "show"}><Link to="/addBalanceUser">Add Balance</Link></li>
+                    <li className={role == 1 ? "hidden" : "show"}><Link to="/viewTransaction">View Transaction</Link></li>
+                    <button className={token ? "hidden" : "show"} onClick={() => navigate("/login")}>Login</button>
+                    <button><Link className="text-white px-5" to="/signup">Signup</Link></button>
+                    <button className={token ? "show" : "hidden"} onClick={() => handleLogout()}>Logout</button>
+                    <button className={role == 1 ? "hidden" : "show"} onClick={() => navigate("/viewCart")}>Cart{value} </button>
+                </ul>
+                <div>
+                    {/* <input
                     type="text"
                     placeholder="Search"
 
                 />
                 <button onClick={() => alert(`Search for: ${searchTerm}`)}>Search</button> */}
-                <Debounce />
-            </div>
-        </nav>
+                </div>
+            </nav>
+        </>
     );
 
 }

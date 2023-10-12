@@ -27,6 +27,7 @@ import AddBalanceUser from './pages/addBalanceUser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ViewTransaction from './pages/viewTransaction';
+import Debounce1 from './components/debounce1';
 import "./App.css"
 
 function App() {

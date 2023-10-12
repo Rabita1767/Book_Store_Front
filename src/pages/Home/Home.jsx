@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import UseSearchHook from "../../hooks/useSearchHook";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import InputField from "../../components/inputField";
 const Home = () => {
     const [optionValue, setOptionValue] = useState("");
+    const [debounceValue, setDebounceValue] = useState("");
     const [result, setResult] = useState([]);
     const role = localStorage.getItem("role");
-    const { dropDown } = UseSearchHook();
+    const navigate = useNavigate();
+    const { dropDown, dropDownPrice, dropDownRating, debounceData } = UseSearchHook();
     const handleChange = (e) => {
         setOptionValue(e.target.value);
         const fetchData = async () => {
@@ -19,6 +23,7 @@ const Home = () => {
                     toast('No data found');
                 } else {
                     setResult(response.data);
+
                 }
             } catch (error) {
                 console.log(error);
@@ -26,18 +31,89 @@ const Home = () => {
         }
         fetchData()
     }
+    const handleSortPrice = (e) => {
+        setOptionValue(e.target.value);
+        const fetchPriceSortedData = async () => {
+            try {
+                const response = await dropDownPrice(e.target.value);
+                console.log(response.data);
+                setResult(response.data);
+
+            } catch (error) {
+                console.log(error);
+
+            }
+        }
+        fetchPriceSortedData();
+    }
+    const handleSortRating = (e) => {
+        setOptionValue(e.target.value);
+        const fetchRatingSortedData = async () => {
+            try {
+                const response = await dropDownRating(e.target.value);
+                console.log(response.data);
+                setResult(response.data);
+
+            } catch (error) {
+                console.log(error);
+
+            }
+        }
+        fetchRatingSortedData();
+    }
     console.log(result);
+    const handleDebounceChange = (e) => {
+        setDebounceValue(e.target.value);
+        const fetchData = async () => {
+            try {
+                const response = await debounceData(e.target.value);
+                console.log(response.data);
+                setResult(response.data);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }
+
+
 
     return (
         <>
             <Header />
-            <select value={optionValue} onChange={handleChange}>
-                <option value="Fiction">Fiction</option>
-                <option value="Classic Literature">Classic Literature</option>
-                <option value="Biography">Biography</option>
-                <option value="Fantasy">Fantasy</option>
-                <option value="Horror">Horror</option>
-            </select>
+            <div className="flexDiv">
+                <div>
+                    <InputField
+                        name="search"
+                        onChange={handleDebounceChange}
+                    />
+                </div>
+                <div>
+                    <select value={optionValue} onChange={handleChange}>
+                        <option value="" disabled>Category</option>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Classic Literature">Classic Literature</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Horror">Horror</option>
+                    </select>
+                </div>
+                <div>
+                    <select value={optionValue} onChange={handleSortPrice}>
+                        <option value="" disabled>Sort By Price</option>
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+                <div>
+                    <select value={optionValue} onChange={handleSortRating}>
+                        <option value="" disabled>Rating</option>
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            </div>
 
             <div className="product-grid">
                 {result.data && result.data.map((item) => (
