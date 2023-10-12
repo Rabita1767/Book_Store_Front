@@ -5,7 +5,7 @@ const AdminAuth = () => {
     const role = localStorage.getItem("role");
     console.log("Authenticating", role);
 
-    return role === 1 ? (
+    return role == 1 ? (
         <div>
             <Outlet />{" "}
         </div>
