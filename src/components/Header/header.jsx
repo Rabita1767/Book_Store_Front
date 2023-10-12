@@ -67,7 +67,7 @@ const Header = ({ value }) => {
                     <button className={token ? "hidden" : "show"} onClick={() => navigate("/signup")}>Signup</button>
                     {/* <button><Link className="text-white px-5" to="/signup">Signup</Link></button> */}
                     <button className={token ? "show" : "hidden"} onClick={() => handleLogout()}>Logout</button>
-                    <button className={token ? "show" : "hidden"} onClick={() => navigate("/viewCart")}><FaShoppingCart style={{ color: '#e0a951', fontSize: '50px' }} />{value} </button>
+                    <button className={role == 1 ? "hidden" : "show"} onClick={() => navigate("/viewCart")}><FaShoppingCart style={{ color: '#e0a951', fontSize: '50px' }} />{value} </button>
                     {/* <button className={token ? "show" : "hidden"}><FaShoppingCart style={{ color: 'blue', fontSize: '50px' }} /></button> */}
                     <button onClick={() => { navigate('/search') }}><FaSearch style={{ color: '#e0a951', fontSize: '50px' }} /></button>
                 </ul>

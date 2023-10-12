@@ -8,7 +8,7 @@ const UseUserHook = () => {
     const [balance, setBalance] = useState(null);
     const [reviewInfo, setReviewInfo] = useState("");
     const [transaction, setTransaction] = useState("");
-    const [allReview, setAllReview] = useState([]);
+    // const [allReview, setAllReview] = useState([]);
     const token = localStorage.getItem("token");
     const balanceAdd = (formData) => {
         axiosInstance.post("/user/addBalance", formData,
@@ -62,15 +62,15 @@ const UseUserHook = () => {
             toast(error.response.data.message);
         }
     }
-    const findProductReview = (productId) => {
-        axiosInstance.get(`/user/getProductReview?bookId=${productId}`)
-            .then(resp => {
-                console.log(resp.data.data);
-                setAllReview(resp.data.data)
-            })
-            .catch(err => { console.log(err) })
+    // const findProductReview = (productId) => {
+    //     axiosInstance.get(`/user/getProductReview?bookId=${productId}`)
+    //         .then(resp => {
+    //             console.log(resp.data.data);
+    //             setAllReview(resp.data.data)
+    //         })
+    //         .catch(err => { console.log(err) })
 
-    }
+    // }
     const fetchProductReviewById = (formData, productId) => {
         axiosInstance.patch(`/user/updateReview`, formData,
             {
@@ -110,6 +110,39 @@ const UseUserHook = () => {
         }
 
     }
-    return { balanceAdd, balance, setBalance, addReview, reviewInfo, setReviewInfo, getAllTransaction, setTransaction, transaction, findProductReview, setAllReview, allReview, fetchProductReviewById, userProfile, fetchReview }
+    const getBookById = async (productId) => {
+        try {
+            const resp = await axiosInstance.get(`/book/getBookById?id=${productId}`)
+            console.log(resp);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(error.response.data.message);
+        }
+    }
+    const addRev = async (formData) => {
+        try {
+            const resp = axiosInstance.post("/user/addReview", formData)
+            console.log(resp);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(error.response.data.message);
+        }
+    }
+    const updateRev = async (formData) => {
+        try {
+            const resp = axiosInstance.patch("/user/updateReview", formData)
+            console.log(resp);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(error.response.data.message);
+        }
+    }
+    return { balanceAdd, balance, setBalance, addReview, reviewInfo, setReviewInfo, getAllTransaction, setTransaction, transaction, fetchProductReviewById, userProfile, fetchReview, getBookById, addRev, updateRev }
 }
 export default UseUserHook;

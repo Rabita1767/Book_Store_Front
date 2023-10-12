@@ -9,10 +9,15 @@ import styles from "./productDetails.module.scss"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const ProductDetails = () => {
-    const navigate = useNavigate();
-    const [reviewData, setReviewData] = useState("");
+    const { fetchReview, getBookById, addRev, updateRev } = UseUserHook();
+    const { productId } = useParams();
     const userId = localStorage.getItem("id");
-    const { addReview, reviewInfo, setReviewInfo, fetchProductReviewById, fetchReview } = UseUserHook();
+    const role = localStorage.getItem("role");
+    const [book, setBook] = useState("");
+    const [reviewData, setReviewData] = useState();
+    const [rating, setRating] = useState(0);
+    const navigate = useNavigate();
+    let flag = false;
     const
         {
             getValues,
@@ -22,56 +27,7 @@ const ProductDetails = () => {
             formState: { errors }
 
         } = useForm()
-    let flag = false;
-    const { productId } = useParams();
-    const [rating, setRating] = useState(0);
-    const { fetchProductById, setParam, param } = UseProductHook();
-    const { findProductReview, setAllReview, allReview } = UseUserHook();
-    useEffect(() => {
-        findProductReview(productId)
-    }, [])
-    useEffect(() => {
-        console.log(allReview)
-    }, [allReview])
-    allReview.map(review => {
-        if (review.userId == userId) {
-            flag = true;
-        }
-    });
 
-    useEffect(() => {
-        fetchProductById(productId);
-
-    }, [])
-    useEffect(() => {
-        console.log(reviewInfo)
-    }, [reviewInfo])
-    console.log(rating)
-    const handleAdd = () => {
-        const comment = getValues("comment");
-        const data =
-        {
-            bookId: productId,
-            comment: comment,
-            rating: rating
-        }
-        addReview(data);
-
-    }
-    console.log(productId)
-    const handleUpdate = () => {
-        const comment = getValues("comment");
-        const data =
-        {
-            bookId: productId,
-            comment: comment,
-            rating: rating
-        }
-        fetchProductReviewById(data);
-    }
-    useEffect(() => {
-        console.log(reviewInfo);
-    }, [reviewInfo])
     useEffect(() => {
         const review = async () => {
             try {
@@ -90,21 +46,99 @@ const ProductDetails = () => {
         review();
 
     }, [])
+    useEffect(() => {
+        const fetchBook = async () => {
+            try {
+                const response = await getBookById(productId)
+                console.log(response.data)
+                setBook(response.data.data);
+            } catch (error) {
+                console.log(error);
+
+            }
+        }
+        fetchBook();
+    }, [])
+    console.log(reviewData);
+    if (Array.isArray(reviewData)) {
+        reviewData.map(rev => {
+            if (rev.userId._id == userId) {
+                flag = true;
+            }
+        });
+    }
+    console.log(book)
+    const handleUpdate = () => {
+        const comment = getValues("comment");
+        const data =
+        {
+            bookId: productId,
+            comment: comment,
+            rating: rating
+        }
+        const update = async () => {
+            try {
+                const response = await updateRev(data)
+                console.log(response.data)
+                if (response.data.success) {
+                    toast(response.data.message);
+                    navigate("/")
+                }
+                else {
+                    toast(response.data.message);
+                }
+
+            } catch (error) {
+                console.log(error)
+                toast(error.response.data.message)
+            }
+        }
+        update();
+    }
+    const handleAdd = () => {
+        const comment = getValues("comment");
+        const data =
+        {
+            bookId: productId,
+            comment: comment,
+            rating: rating
+        }
+        const add = async () => {
+            try {
+                const response = await addRev(data)
+                console.log(response.data)
+                if (response.data.success) {
+                    toast(response.data.message);
+                    navigate("/")
+                }
+                else {
+                    toast(response.data.message);
+                }
+
+            } catch (error) {
+                console.log(error)
+                toast(error.response.data.message)
+            }
+        }
+        add();
+    }
+
+    console.log(rating)
     return (
         <>
             <Header />
-            <div>
-                <div className="product-grid">
-                    {param && param.map((item) => (
-                        <div key={item.id} className="product-item">
-                            <img src={item.image} alt={item.name} />
-                            <h3>{item.name}</h3>
-                            <p>Category: {item.category}</p>
-                            <p>Price: ${item.price}</p>
+            <div className="mid">
+                <div className="mid-left">
+                    <div className="product-grid">
+                        <div className="product-item">
+                            <img src={book.image} alt={book.name} />
+                            <h3>{book.name}</h3>
+                            <p>Category: {book.category}</p>
+                            <p>Price: ${book.price}</p>
                         </div>
-                    ))}
+                    </div>
                 </div>
-                <div>
+                <div className="mid-right">
                     <h3>Add Rating</h3>
                     {Array(5).fill().map((_, i) =>
                         <Star
@@ -145,31 +179,7 @@ const ProductDetails = () => {
                     </form>
                 </div>
             </div>
-
-            <div className="tbl">
-                <table border="2px">
-                    <thead>
-                        <tr>
-                            {/* <th>Name</th> */}
-                            <th>Comment</th>
-                            <th>Rating</th>
-                        </tr>
-                    </thead>
-                    <tbody className="t1">
-                        {reviewData && reviewData.map((review, index) => (
-                            <tr key={index}>
-                                {/* <td>{review.userId.name}</td> */}
-                                <td>{review.comment}</td>
-                                <td>{review.rating}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
         </>
     )
-
-
 }
-export default ProductDetails
+export default ProductDetails;
