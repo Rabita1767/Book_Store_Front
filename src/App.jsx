@@ -46,7 +46,6 @@ function App() {
             <Route path="/updateUser/:userId" element={<UpdateUser />} />
             <Route path="/addDiscount" element={<AddDiscount />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/discount" element={<Discount />} />
           </Route>
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
@@ -58,6 +57,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/viewTransaction" element={<ViewTransaction />} />
             <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/discount" element={<Discount />} />
           </Route>
         </Routes>
       </Router>

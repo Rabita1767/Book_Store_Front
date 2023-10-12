@@ -26,7 +26,7 @@ const AddDiscount = () => {
                 <div>
                     <h3>Enter Id</h3>
                     <Controller
-                        name="_id"
+                        name="id"
                         control={control}
                         render={({ field }) =>
                         (
@@ -37,7 +37,7 @@ const AddDiscount = () => {
                             />
                         )}
                     />
-                    {errors._id && <h5 className="error-message">{errors._id.message}</h5>}
+                    {errors.id && <h5 className="error-message">{errors.id.message}</h5>}
                 </div>
                 <div>
                     <h3>Enter discountPercentage</h3>
