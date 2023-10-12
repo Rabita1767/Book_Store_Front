@@ -18,11 +18,11 @@ const Debounce = () => {
                 <input type="text" onChange={(e) => setSearch(e.target.value)} class="form-control py-2" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                 <span className="input-group-text -3" id="basic-addon2"><FaSearch className="fs-6" /></span>
             </div>
-            {/* <div>
+            <div>
                 {searchData && searchData.map((item) =>
                     <h1 key={item._id}>{item.name}</h1>
                 )}
-            </div> */}
+            </div>
         </>
     )
 

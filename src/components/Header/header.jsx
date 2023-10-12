@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { clearUserInfo } from "../../redux/userSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import store from "../../redux/userStore";
-import "./header.scss"
+import "./headerAdmin.scss"
 const Header = ({ value }) => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -151,12 +151,13 @@ const Header = ({ value }) => {
                 <button className={role == 1 ? "hidden" : "show"} onClick={() => navigate("/viewCart")}>Cart{value} </button>
             </ul>
             <div>
-                <input
+                {/* <input
                     type="text"
                     placeholder="Search"
 
                 />
-                <button onClick={() => alert(`Search for: ${searchTerm}`)}>Search</button>
+                <button onClick={() => alert(`Search for: ${searchTerm}`)}>Search</button> */}
+                <Debounce />
             </div>
         </nav>
     );

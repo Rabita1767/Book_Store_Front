@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import Button from "../../components/ui/button";
 import UseProductHook from "../../hooks/useProductHooks";
+
 import "./product.css";
 import Header from "../../components/Header/header";
 const Product = () => {
@@ -10,13 +11,9 @@ const Product = () => {
     const [next, setNext] = useState(1)
     const navigate = useNavigate();
     const role = localStorage.getItem("role");
-    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook, myCart, setAddCart, addCart, fetchNext, nextPagination, setNextPagination } = UseProductHook();
-    // useEffect(() => {
-    //     fetchData();
-    // }, [])
+    const { setProduct, fetchData, product, getBookData, isbn, setIsbn, loading, deleteBook, delBook, myCart, fetchNext, setAddCart, addCart, nextPagination, setNextPagination } = UseProductHook();
+
     useEffect(() => {
-        // setNext(next + 1)
-        // setPrev(next)
         fetchNext(next)
     }, [])
     useEffect(() => {
@@ -26,7 +23,6 @@ const Product = () => {
         console.log(delBook)
     }, [product])
     const handleUpdate = (id, e) => {
-        // getBookData(id);
         navigate(`/product/${id}`)
 
     }
