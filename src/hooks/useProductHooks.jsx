@@ -241,6 +241,7 @@ const UseProductHook = () => {
                 setCheckOut(resp.data);
                 if (resp.data.success) {
                     toast(resp.data.message)
+                    navigate("/viewTransaction")
                 }
             })
             .catch(err => {

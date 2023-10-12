@@ -2,9 +2,16 @@ import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 import Password from '../../components/form/password';
+
 const Signup = () => {
     const { signInfo } = UseAuthHook();
     const [passwordFieldType, setPasswordFieldType] = useState("password");
+    const passwordStyles = {
+        backgroundColor: 'lightgray',
+        border: '1px solid #ccc',
+        padding: '10px',
+        borderRadius: '5px',
+    };
     const {
         handleSubmit,
         control,
@@ -42,10 +49,10 @@ const Signup = () => {
 
     return (
         <>
-            <div>
-                <form onSubmit={handleSubmit(handleChange)}>
+            <div className="footer-right">
+                <form onSubmit={handleSubmit(handleChange)} className="form1">
                     <div>
-                        <h4 className="label">Enter Name</h4>
+                        <h4 className="title1">Enter Name</h4>
                         <Controller
                             name="name"
                             control={control}
@@ -64,14 +71,14 @@ const Signup = () => {
                                 <input
                                     placeholder="Enter name"
                                     {...field}
-                                    className={`input-field ${errors.name ? "error-border" : ""}`}
+                                    className={`f1 ${errors.name ? "error-border" : ""}`}
                                 />
                             )}
                         />
                         {errors.name && <h5 className="error-message">{errors.name.message}</h5>}
                     </div>
                     <div>
-                        <h4 className="label">Enter Email</h4>
+                        <h4 className="title1">Enter Email</h4>
                         <Controller
                             name="email"
                             control={control}
@@ -86,70 +93,16 @@ const Signup = () => {
                                 <input
                                     placeholder="Enter email"
                                     {...field}
-                                    className={`input-field ${errors.email ? "error-border" : ""}`}
+                                    className={`f1 ${errors.email ? "error-border" : ""}`}
                                 />
                             )}
                         />
                         {errors.email && <h5 className="error-message">{errors.email.message}</h5>}
                     </div>
-                    {/* <div>
-                        <h4 className="label">Password</h4>
-                        <Controller
-                            name="password"
-                            control={control}
-                            rules={{
-                                required: "Password is required",
-                                minLength: {
-                                    value: 8,
-                                    message: "Minimum length must be 8",
-                                },
-                                maxLength: {
-                                    value: 50,
-                                    message: "Maximum length must be 50",
-                                }
 
-                            }}
-                            render={({ field }) => (
-                                <input
-                                    placeholder="Enter password"
-                                    {...field}
-                                    className={`input-field ${errors.password ? "error-border" : ""}`}
-                                />
-                            )}
-                        />
-                        {errors.password && <h5 className="error-message">{errors.password.message}</h5>}
-                    </div> */}
-                    <Password control={control} errors={errors} watch={watch} />
-                    {/* <div>
-                        <h4 className="label">Confirm Password</h4>
-                        <Controller
-                            name="confirmPassword"
-                            control={control}
-                            rules={{
-                                required: "Confirm Password is required",
-                                minLength: {
-                                    value: 8,
-                                    message: "Minimum length must be 8",
-                                },
-                                maxLength: {
-                                    value: 50,
-                                    message: "Maximum length must be 50",
-                                },
-                                validate: (value) => value === watch('password') || "Password should match"
-
-                            }}
-                            render={({ field }) => (
-                                <input
-                                    placeholder="Enter Confirm password"
-                                    {...field}
-                                    className={`input-field ${errors.confirmPassword ? "error-border" : ""}`}
-                                />
-                            )}
-                        />
-                        {errors.confirmPassword && <h5 className="error-message">{errors.confirmPassword.message}</h5>}
-                    </div> */}
+                    <Password control={control} errors={errors} watch={watch} style={passwordStyles} />
                     <div>
-                        <h4 className="label">Enter Phone Number</h4>
+                        <h4 className="title1">Enter Phone Number</h4>
                         <Controller
                             name="phone"
                             control={control}
@@ -169,24 +122,13 @@ const Signup = () => {
                                 <input
                                     placeholder="Enter Phone Number"
                                     {...field}
-                                    className={`input-field ${errors.phone ? "error-border" : ""}`}
+                                    className={`f1 ${errors.phone ? "error-border" : ""}`}
                                 />
                             )}
                         />
                         {errors.name && <h5 className="error-message">{errors.phone.message}</h5>}
                     </div>
-                    <button type="submit" className="submit-button">Submit</button>+
-                    {/* <p>Enter Name :</p>
-                    <input type="text" label="name" onChange={(e) => setName(e.target.value)} />
-                    <p>Enter Email :</p>
-                    <input type="text" label="email" onChange={(e) => setEmail(e.target.value)} />
-                    <p>Enter Password</p>
-                    <input type="text" label="password" onChange={(e) => setPassword(e.target.value)} />
-                    <p>Confirm Pssword</p>
-                    <input type="text" label="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)} />
-                    <p>Enter Phone Number</p>
-                    <input type="text" label="phone" onChange={(e) => setPhone(e.target.value)} />
-                    <button type="submit">Sign up</button> */}
+                    <button type="submit" className="btn2">Submit</button>+
                 </form>
             </div>
         </>

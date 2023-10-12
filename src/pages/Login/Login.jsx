@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 import { useDispatch } from "react-redux";
 import { addUserInfo } from "../../redux/userSlice";
+import styles from "./login.module.scss"
 const Login = () => {
     const dispatch = useDispatch();
     const {
@@ -24,22 +25,17 @@ const Login = () => {
         console.log(logInfo);
     }, [logInfo]);
     const handlerSubmit = (data) => {
-        // const data = {
-        //     email: getValues("email"),
-        //     password: getValues("password"),
-        // };
+
         console.log(data);
         login(data);
-        // navigate('/addBook');
     };
     console.log(logInfo);
-    // dispatch(addUserInfo(logInfo));
     return (
         <>
-            <div>
-                <form onSubmit={handleSubmit(handlerSubmit)}>
+            <div className="footer-right">
+                <form onSubmit={handleSubmit(handlerSubmit)} className="form1">
                     <div>
-                        <h4 className="label">Enter Email</h4>
+                        <label htmlFor="" class="title1">Enter Your Name:</label>
                         <Controller
                             name="email"
                             control={control}
@@ -51,55 +47,39 @@ const Login = () => {
                                 },
                             }}
                             render={({ field }) => (
-                                <input
-                                    placeholder="Enter email"
-                                    {...field}
-                                    className={`input-field ${errors.email ? "error-border" : ""}`}
-                                />
+                                <div>
+                                    <input
+                                        placeholder="Enter email"
+                                        {...field}
+                                        className={`f1 ${errors.email ? "error-border" : ""}`}
+                                    />
+                                </div>
                             )}
                         />
                         {errors.email && <h5 className="error-message">{errors.email.message}</h5>}
                     </div>
                     <div>
-                        <h4 className="label">Password</h4>
+                        <label htmlFor="" class="title1">Enter Your Password</label>
                         <Controller
                             name="password"
                             control={control}
-                            // rules={{
-                            //     required: "Password is required",
-                            //     minLength: {
-                            //         value: 8,
-                            //         message: "Minimum length must be 8",
-                            //     },
-                            //     maxLength: {
-                            //         value: 25,
-                            //         message: "Maximum length must be 50",
-                            //     },
-                            //     pattern: {
-                            //         value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/,
-                            //         message:
-                            //             "Password must be atleast 8 characters long,it should contain minimum one block letter,one smaill letter and one special character",
-                            //     },
-                            // }}
                             render={({ field }) => (
-                                <input
-                                    placeholder="Enter password"
-                                    {...field}
-                                    className={`input-field ${errors.password ? "error-border" : ""}`}
-                                />
+                                <div>
+                                    <input
+                                        placeholder="Enter password"
+                                        {...field}
+                                        className={`f1 ${errors.password ? "error-border" : ""}`}
+                                    />
+                                </div>
                             )}
                         />
                         {errors.name && <h5 className="error-message">{errors.password.message}</h5>}
                     </div>
-                    <button type="submit" className="submit-button">
+                    <button type="submit" className="btn2">
                         Submit
                     </button>
-                    {/* <p>Enter your email</p>
-                    <input type="text" label="email" onChange={(e) => setEmail(e.target.value)} />
-                    <p>Enter Your password</p>
-                    <input type="text" label="password" onChange={(e) => setPassword(e.target.value)} />
-                    <button type="submit">Login</button> */}
                 </form>
+
             </div>
         </>
     );

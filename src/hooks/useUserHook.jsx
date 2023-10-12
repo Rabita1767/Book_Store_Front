@@ -8,7 +8,7 @@ const UseUserHook = () => {
     const [balance, setBalance] = useState(null);
     const [reviewInfo, setReviewInfo] = useState("");
     const [transaction, setTransaction] = useState("");
-    const [allReview, setAllReview] = useState([])
+    const [allReview, setAllReview] = useState([]);
     const token = localStorage.getItem("token");
     const balanceAdd = (formData) => {
         axiosInstance.post("/user/addBalance", formData,
@@ -22,6 +22,7 @@ const UseUserHook = () => {
                 setBalance(resp.data.data)
                 if (resp.data.success) {
                     toast(resp.data.message)
+                    navigate("/")
                 }
             })
             .catch(err => {
@@ -41,7 +42,7 @@ const UseUserHook = () => {
                 setReviewInfo(resp.data)
                 if (resp.data.success) {
                     toast(resp.data.message)
-                    // navigate("/")
+                    navigate("/")
                 }
             })
             .catch(err => {
@@ -50,20 +51,16 @@ const UseUserHook = () => {
             })
 
     }
-    const getAllTransaction = () => {
-        axiosInstance.get("/user/viewTransaction",
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(resp => {
-                console.log(resp.data.data)
-                setTransaction(resp.data.data)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const getAllTransaction = async () => {
+        try {
+            const resp = await axiosInstance.get("/user/viewTransaction")
+            console.log(resp);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(error.response.data.message);
+        }
     }
     const findProductReview = (productId) => {
         axiosInstance.get(`/user/getProductReview?bookId=${productId}`)
@@ -81,9 +78,38 @@ const UseUserHook = () => {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then(resp => { console.log(resp.data) })
+            .then(resp => {
+                console.log(resp.data)
+                if (resp.data.success) {
+                    toast(resp.data.message)
+                    navigate("/")
+                }
+            })
             .catch(err => { console.log(err) })
     }
-    return { balanceAdd, balance, setBalance, addReview, reviewInfo, setReviewInfo, getAllTransaction, setTransaction, transaction, findProductReview, setAllReview, allReview, fetchProductReviewById }
+    const userProfile = async () => {
+        try {
+            const resp = await axiosInstance.get("/user/viewProfile")
+            console.log(resp.data);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(error.response.data.message);
+        }
+    }
+    const fetchReview = async (productId) => {
+        try {
+            const resp = await axiosInstance.get(`user/getProductReview?bookId=${productId}`)
+            console.log(resp);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(error.response.data.message);
+        }
+
+    }
+    return { balanceAdd, balance, setBalance, addReview, reviewInfo, setReviewInfo, getAllTransaction, setTransaction, transaction, findProductReview, setAllReview, allReview, fetchProductReviewById, userProfile, fetchReview }
 }
 export default UseUserHook;

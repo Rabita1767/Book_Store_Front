@@ -6,7 +6,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/inputField";
-const Home = () => {
+import { FaSearch } from 'react-icons/fa';
+const Search = () => {
     const [optionValue, setOptionValue] = useState("");
     const [debounceValue, setDebounceValue] = useState("");
     const [result, setResult] = useState([]);
@@ -88,7 +89,7 @@ const Home = () => {
                         name="search"
                         onChange={handleDebounceChange}
                     />
-                </div>
+                </div><FaSearch />
                 <div>
                     <select value={optionValue} onChange={handleChange}>
                         <option value="" disabled>Category</option>
@@ -140,4 +141,4 @@ const Home = () => {
         </>
     )
 }
-export default Home;
+export default Search;

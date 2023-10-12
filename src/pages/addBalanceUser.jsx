@@ -2,6 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useEffect } from "react";
 import UseUserHook from "../hooks/useUserHook";
 import Header from "../components/Header/header";
+import "./addBalance.scss"
 const AddBalanceUser = () => {
     const { balanceAdd, balance, setBalance } = UseUserHook();
     const {
@@ -32,7 +33,7 @@ const AddBalanceUser = () => {
     return (
         <>
             <Header />
-            <form onSubmit={handleSubmit(handleAddBalance)}>
+            <form onSubmit={handleSubmit(handleAddBalance)} className="form-div">
                 <div>
                     <h3>Enter Balance</h3>
                     <Controller
@@ -49,6 +50,11 @@ const AddBalanceUser = () => {
                             {
                                 value: 5000,
                                 message: "Cant add more than 5000"
+                            },
+                            pattern:
+                            {
+                                value: /^\d+(\.\d+)?$/,
+                                message: "Invalid Input!"
                             }
 
                         }}
@@ -57,7 +63,7 @@ const AddBalanceUser = () => {
                                 type="text"
                                 placeholder="Enter Balance of the User"
                                 {...field}
-                                className={`input-field ${errors.balance ? "error-border" : ""}`}
+                                className={`input1 ${errors.balance ? "error-border" : ""}`}
                             />
                         )}
                     />
@@ -73,14 +79,14 @@ const AddBalanceUser = () => {
                                 type="text"
                                 placeholder="Enter Currency"
                                 {...field}
-                                className={`input-field ${errors.currency ? "error-border" : ""}`}
+                                className={`input1 ${errors.currency ? "error-border" : ""}`}
                             />
                         )}
                     />
                     {errors.currency && <h5 className="error-message">{errors.currency.message}</h5>}
                 </div>
                 <div>
-                    <button type="submit">Add Balance</button>
+                    <button className="btn" type="submit">Add Balance</button>
                 </div>
             </form>
         </>

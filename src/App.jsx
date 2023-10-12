@@ -4,8 +4,6 @@ import Layout from './components/Layout/layout';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import Product from './pages/Product/Product';
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup/Signup';
@@ -27,7 +25,8 @@ import AddBalanceUser from './pages/addBalanceUser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ViewTransaction from './pages/viewTransaction';
-import Debounce1 from './components/debounce1';
+import Search from './pages/Search/search';
+import DashBoard from './pages/dashBoard';
 import "./App.css"
 
 function App() {
@@ -37,7 +36,6 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -45,6 +43,8 @@ function App() {
           <Route path="/updateUser/:userId" element={<UpdateUser />} />
           <Route path="/addDiscount" element={<AddDiscount />} />
           <Route path="addBalanceUser" element={<AddBalanceUser />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/dashboard" element={<DashBoard />} />
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
             <Route path="/product" element={<Product />} />

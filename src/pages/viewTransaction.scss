@@ -1,15 +1,37 @@
-.product-grid {
-    width: 100%;
-    border-collapse: collapse;
+.tbl thead {
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
 }
 
-.product-grid th,
-.product-grid td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.tbl {
+    margin-top: 240px;
+    margin-left: 380px;
+
 }
 
-.product-grid thead {
-    background-color: #f2f2f2;
+.tbl thead tr th {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 55px;
+}
+
+.tbl tbody tr td {
+    font-size: 16px;
+    padding: 10px 35px;
+    text-align: center;
+}
+
+.tbl .t1 {
+    padding: 30px;
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.tPrice {
+    font-size: 18px;
+    justify-content: center;
 }

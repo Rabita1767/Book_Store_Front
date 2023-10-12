@@ -1,0 +1,39 @@
+.show {
+    display: block;
+
+}
+
+.hidden {
+    display: none;
+
+}
+
+.navbar {
+    background-color: #333;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Style for the navigation links */
+.nav {
+    text-decoration: none;
+    /* Remove underlines */
+    color: #fff;
+    /* Link text color */
+    padding: 10px 30px;
+    /* Spacing around the links */
+    margin: 0 10px;
+    /* Margin between the links */
+    font-weight: bold;
+    transition: color 0.3s, background-color 0.3s;
+
+}
+
+.nav:hover {
+    background-color: #ff6600;
+    border-radius: 5px;
+    color: #fff;
+
+    transform: scale(1.05);
+
+}

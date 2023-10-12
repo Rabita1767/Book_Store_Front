@@ -1,39 +1,110 @@
+/* Define styles for the header and navbar container */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    /* Increased padding for a larger header */
+}
+
 .show {
     display: block;
-
 }
 
 .hidden {
     display: none;
-
 }
 
 .navbar {
-    background-color: #333;
-    padding: 10px 0;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+
+        .logo {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            margin-right: 5px;
+
+            .FaBook {
+                margin-right: 5px;
+            }
+        }
+
+        li {
+            margin-right: 50px;
+            padding-left: 60px;
+
+            a {
+                text-decoration: none;
+                color: #fff;
+
+                &.text-white {
+                    color: #fff;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    color: #c37c1f;
+                }
+            }
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-right: 20px;
+
+            &.hidden {
+                display: none;
+            }
+
+            &.show {
+                display: inline-block;
+            }
+        }
+
+        .FaShoppingCart {
+            color: blue;
+            font-size: 50px;
+            margin-right: 10px;
+        }
+
+        .FaSearch {
+            color: blue;
+            font-size: 50px;
+        }
+
+        /* Style the login, signup, and cart buttons on the left side */
+        .left-buttons {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+            /* Push the buttons to the left */
+
+            button {
+                margin-right: 20px;
+            }
+        }
+    }
 }
 
-/* Style for the navigation links */
-.nav {
-    text-decoration: none;
-    /* Remove underlines */
+/* Add a hover effect to the buttons */
+.button:hover {
+    background-color: #00f;
     color: #fff;
-    /* Link text color */
-    padding: 10px 30px;
-    /* Spacing around the links */
-    margin: 0 10px;
-    /* Margin between the links */
-    font-weight: bold;
-    transition: color 0.3s, background-color 0.3s;
-
+    border: 1px solid #00f;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav:hover {
-    background-color: #ff6600;
-    border-radius: 5px;
-    color: #fff;
-
-    transform: scale(1.05);
-
-}
+/* Add styles for specific links or buttons as needed */

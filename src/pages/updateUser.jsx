@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/header";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "./updateUser.scss"
+
 const UpdateUser = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");

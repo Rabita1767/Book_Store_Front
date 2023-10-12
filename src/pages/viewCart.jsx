@@ -2,6 +2,8 @@ import UseProductHook from "../hooks/useProductHooks"
 import UseCartHook from "../hooks/useCartHook";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ViewCart = () => {
     const navigate = useNavigate();
     const [cnt, setCnt] = useState(0);
@@ -36,10 +38,12 @@ const ViewCart = () => {
         }
         const response = await addItemByIncrease(data)
         console.log(response);
+        toast(response.message);
         if (response.success) {
             const viewResponse = await viewCartItem();
-            console.log(viewResponse.data);
-            setCartData(viewResponse.data)
+            console.log(viewResponse);
+            setCartData(viewResponse.data);
+            toast(viewResponse.message);
         }
 
     }
@@ -57,12 +61,14 @@ const ViewCart = () => {
                     }
                 ]
         }
+        console.log(data)
         const response = await addItemByDecrease(data)
         console.log(response);
+        toast(response.message);
         if (response.success) {
             const viewResponse = await viewCartItem();
             console.log(viewResponse.data);
-            setCartData(viewResponse.data)
+            setCartData(viewResponse.data);
         }
 
     }
