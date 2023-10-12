@@ -2,6 +2,8 @@ import Header from "../../components/Header/header";
 import "./home.scss"
 import { useState, useEffect } from "react";
 import UseSearchHook from "../../hooks/useSearchHook";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Home = () => {
     const [optionValue, setOptionValue] = useState("");
     const [result, setResult] = useState([]);
@@ -13,9 +15,13 @@ const Home = () => {
             try {
                 const response = await dropDown(e.target.value);
                 console.log(response.data);
-                setResult(response.data);
+                if (!response.data || response.data.data.length === 0) {
+                    toast('No data found');
+                } else {
+                    setResult(response.data);
+                }
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
         fetchData()
@@ -30,6 +36,7 @@ const Home = () => {
                 <option value="Classic Literature">Classic Literature</option>
                 <option value="Biography">Biography</option>
                 <option value="Fantasy">Fantasy</option>
+                <option value="Horror">Horror</option>
             </select>
 
             <div className="product-grid">
