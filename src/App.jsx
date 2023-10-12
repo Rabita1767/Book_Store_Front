@@ -27,6 +27,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ViewTransaction from './pages/viewTransaction';
 import Search from './pages/Search/search';
 import DashBoard from './pages/dashBoard';
+import Discount from './pages/discount';
+import AdminAuth from './components/adminAuth';
 import "./App.css"
 
 function App() {
@@ -39,20 +41,23 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/getAllUser" element={<User />} />
-          <Route path="/updateUser/:userId" element={<UpdateUser />} />
-          <Route path="/addDiscount" element={<AddDiscount />} />
-          <Route path="addBalanceUser" element={<AddBalanceUser />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/dashboard" element={<DashBoard />} />
+          <Route element={<AdminAuth />}>
+            <Route path="/getAllUser" element={<User />} />
+            <Route path="/updateUser/:userId" element={<UpdateUser />} />
+            <Route path="/addDiscount" element={<AddDiscount />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/discount" element={<Discount />} />
+          </Route>
           <Route element={<Authenticate />}>
             <Route path="/addBook" element={<AddBook />} />
             <Route path="/product" element={<Product />} />
             <Route path="/product/:productId" element={<ProductDetails />} />
-            <Route path="/product/:updateId" element={<UpdateBook />} />
+            <Route path="/update/:updateId" element={<UpdateBook />} />
+            <Route path="addBalanceUser" element={<AddBalanceUser />} />
             <Route path="/viewCart" element={<ViewCart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/viewTransaction" element={<ViewTransaction />} />
+            <Route path="/dashboard" element={<DashBoard />} />
           </Route>
         </Routes>
       </Router>

@@ -19,7 +19,11 @@ const UseAuthHook = () => {
             .then((resp) => {
                 setSignInfo(resp.data);
                 console.log(resp.data);
-                navigate("/login");
+                if (resp.data.success) {
+                    toast(resp.data.message)
+                    navigate("/login");
+                }
+
             })
             .catch((err) => {
                 console.log(err);
@@ -43,7 +47,7 @@ const UseAuthHook = () => {
                 // navigate("/addBook");
                 if (resp.data.success) {
                     toast(resp.data.message)
-                    navigate("/");
+                    navigate("/product");
                 }
 
             })

@@ -52,8 +52,8 @@ const AddBook = () => {
     return (
         <>
             <Header />
-            <form onSubmit={handleSubmit(handleonSubmit)}>
-                <div>
+            <form onSubmit={handleSubmit(handleonSubmit)} className="form">
+                {/* <div>
                     <h4>Enter Image</h4>
                     <Controller
                         name="image"
@@ -66,7 +66,7 @@ const AddBook = () => {
                             />
                         )}
                     />
-                </div>
+                </div> */}
                 <div>
                     <h3>Enter Book ISBN</h3>
                     <Controller

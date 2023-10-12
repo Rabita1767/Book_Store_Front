@@ -122,12 +122,15 @@ const ProductDetails = () => {
         }
         add();
     }
+    useEffect(() => {
+        console.log(reviewData)
+    }, [reviewData])
 
     console.log(rating)
     return (
         <>
             <Header />
-            <div className="mid">
+            <div className={styles.mid}>
                 <div className="mid-left">
                     <div className="product-grid">
                         <div className="product-item">
@@ -178,6 +181,15 @@ const ProductDetails = () => {
                         </button>
                     </form>
                 </div>
+            </div>
+            <div>
+                {reviewData && reviewData.map((review, index) => (
+                    <div key={index} className="review">
+                        <p><strong>Name:</strong> {review.userId.name}</p>
+                        <p><strong>Rating:</strong> {review.rating}</p>
+                        <p><strong>Review:</strong> {review.comment}</p>
+                    </div>
+                ))}
             </div>
         </>
     )

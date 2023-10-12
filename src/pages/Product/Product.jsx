@@ -23,7 +23,7 @@ const Product = () => {
         console.log(delBook)
     }, [product])
     const handleUpdate = (id, e) => {
-        navigate(`/product/${id}`)
+        navigate(`/update/${id}`)
 
     }
     const handleDelete = (id) => {

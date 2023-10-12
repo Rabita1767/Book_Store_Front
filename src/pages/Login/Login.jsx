@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 import { useDispatch } from "react-redux";
+import Header from "../../components/Header/header";
 import { addUserInfo } from "../../redux/userSlice";
-import styles from "./login.module.scss"
+import "./login.scss"
 const Login = () => {
     const dispatch = useDispatch();
     const {
@@ -20,7 +21,6 @@ const Login = () => {
     });
 
     const { login, logInfo } = UseAuthHook();
-    // const navigate = useNavigate();
     useEffect(() => {
         console.log(logInfo);
     }, [logInfo]);
@@ -32,10 +32,11 @@ const Login = () => {
     console.log(logInfo);
     return (
         <>
+            <Header />
             <div className="footer-right">
                 <form onSubmit={handleSubmit(handlerSubmit)} className="form1">
                     <div>
-                        <label htmlFor="" class="title1">Enter Your Name:</label>
+                        <h4 className="label">Enter Email</h4>
                         <Controller
                             name="email"
                             control={control}
@@ -47,11 +48,11 @@ const Login = () => {
                                 },
                             }}
                             render={({ field }) => (
-                                <div>
+                                <div className="textbox">
                                     <input
                                         placeholder="Enter email"
                                         {...field}
-                                        className={`f1 ${errors.email ? "error-border" : ""}`}
+                                        className={`input-field ${errors.email ? "error-border" : ""}`}
                                     />
                                 </div>
                             )}
@@ -59,23 +60,21 @@ const Login = () => {
                         {errors.email && <h5 className="error-message">{errors.email.message}</h5>}
                     </div>
                     <div>
-                        <label htmlFor="" class="title1">Enter Your Password</label>
+                        <h4 className="label">Password</h4>
                         <Controller
                             name="password"
                             control={control}
                             render={({ field }) => (
-                                <div>
-                                    <input
-                                        placeholder="Enter password"
-                                        {...field}
-                                        className={`f1 ${errors.password ? "error-border" : ""}`}
-                                    />
-                                </div>
+                                <input
+                                    placeholder="Enter password"
+                                    {...field}
+                                    className={`input-field ${errors.password ? "error-border" : ""}`}
+                                />
                             )}
                         />
                         {errors.name && <h5 className="error-message">{errors.password.message}</h5>}
                     </div>
-                    <button type="submit" className="btn2">
+                    <button type="submit" className="submit-button">
                         Submit
                     </button>
                 </form>

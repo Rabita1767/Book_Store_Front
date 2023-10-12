@@ -249,7 +249,39 @@ const UseProductHook = () => {
                 toast(err.response.data.message);
             })
     }
-    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser, addProductDiscount, setDiscount, discount, viewCartInfo, cartItem, setCartItem, checkout, setCheckOut, handleCheckout, myCartAdd };
+    const fetchAllBook = async () => {
+        try {
+            const resp = await axiosInstance.get("/auth/getAllBook")
+            console.log(resp.data);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(err.response.data.message);
+        }
+    }
+    const fetchAllDiscount = async () => {
+        try {
+            const resp = await axiosInstance.get("/auth/discount")
+            console.log(resp.data);
+            return resp;
+
+        } catch (error) {
+            console.log(error);
+            toast(err.response.data.message);
+        }
+    }
+    const discountBook = async () => {
+        try {
+            const resp = await axiosInstance.get("/auth/discount")
+            console.log(resp.data);
+            return resp;
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return { fetchData, setProduct, product, getBookData, setIsbn, isbn, searchFunc, setSearchData, searchData, setNameFilter, nameFilter, filterData, fetchProductById, setParam, param, addBookFunc, addBook, delBook, setDeleteBook, deleteBook, getBookInfo, upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo, myCart, setAddCart, addCart, CartItem, viewCart, setViewCart, fetchNext, nextPagination, setNextPagination, updateUser, setUpUser, upUser, addProductDiscount, setDiscount, discount, viewCartInfo, cartItem, setCartItem, checkout, setCheckOut, handleCheckout, myCartAdd, fetchAllBook, fetchAllDiscount, discountBook };
 
 }
 export default UseProductHook;

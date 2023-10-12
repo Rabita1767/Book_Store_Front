@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import UseAuthHook from "../../hooks/useAuthHook";
 import Password from '../../components/form/password';
-
+import Header from "../../components/Header/header";
+import "../Login/login.scss"
 const Signup = () => {
     const { signInfo } = UseAuthHook();
     const [passwordFieldType, setPasswordFieldType] = useState("password");
@@ -49,6 +50,7 @@ const Signup = () => {
 
     return (
         <>
+            <Header />
             <div className="footer-right">
                 <form onSubmit={handleSubmit(handleChange)} className="form1">
                     <div>
@@ -71,7 +73,7 @@ const Signup = () => {
                                 <input
                                     placeholder="Enter name"
                                     {...field}
-                                    className={`f1 ${errors.name ? "error-border" : ""}`}
+                                    className={`input1 ${errors.name ? "error-border" : ""}`}
                                 />
                             )}
                         />
@@ -93,14 +95,14 @@ const Signup = () => {
                                 <input
                                     placeholder="Enter email"
                                     {...field}
-                                    className={`f1 ${errors.email ? "error-border" : ""}`}
+                                    className={`input1 ${errors.email ? "error-border" : ""}`}
                                 />
                             )}
                         />
                         {errors.email && <h5 className="error-message">{errors.email.message}</h5>}
                     </div>
 
-                    <Password control={control} errors={errors} watch={watch} style={passwordStyles} />
+                    <Password control={control} errors={errors} watch={watch} />
                     <div>
                         <h4 className="title1">Enter Phone Number</h4>
                         <Controller
@@ -122,13 +124,14 @@ const Signup = () => {
                                 <input
                                     placeholder="Enter Phone Number"
                                     {...field}
-                                    className={`f1 ${errors.phone ? "error-border" : ""}`}
+                                    className={`input1 ${errors.phone ? "error-border" : ""}`}
                                 />
                             )}
                         />
-                        {errors.name && <h5 className="error-message">{errors.phone.message}</h5>}
+                        {errors.phone && <h5 className="error-message">{errors.phone.message}</h5>}
                     </div>
-                    <button type="submit" className="btn2">Submit</button>+
+
+                    <button type="submit" className="btn">Submit</button>+
                 </form>
             </div>
         </>

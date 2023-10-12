@@ -3,6 +3,7 @@ import UseProductHook from "../hooks/useProductHooks";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "../components/Header/header";
+import "./updateBook.scss"
 const UpdateBook = () => {
     const { updateId } = useParams();
     const { upBook, getBookInfo, updatedBook, setUpdatedBookInfo, updatedBookInfo } = UseProductHook();
@@ -61,7 +62,7 @@ const UpdateBook = () => {
     return (
         <>
             <Header />
-            <form onSubmit={handleSubmit(handleonSubmit)}>
+            <form onSubmit={handleSubmit(handleonSubmit)} className="form">
                 <div>
                     <h4>Enter Image</h4>
                     <Controller

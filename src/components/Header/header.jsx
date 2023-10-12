@@ -54,6 +54,7 @@ const Header = ({ value }) => {
                 <ul>
                     <a href="#" className="logo"><FaBook />bookly</a>
                     <li><Link to="/">Home</Link></li>
+                    <li><Link to="/discount">Discounted Products</Link></li>
                     <li className={role == 1 ? "show" : "hidden"} ><Link to="/getAllUser">Users</Link></li>
                     <li className={role == 1 ? "show" : "hidden"}><Link to="/product">Books</Link></li>
                     <li className={role == 1 ? "show" : "hidden"}><Link to="/addBook">Add New Book</Link></li>
